@@ -7,7 +7,9 @@ let initalState={
 export default function rootReducer(state=initalState,action){
     switch(action.type){
         case GET_DOGS:
-            return{...state, dogs: state.dogs.concat(action.payload)}
+            if(state.dogs.length<1){
+                return{...state, dogs: state.dogs.concat(action.payload)}
+            }
         case GET_DOG:
             return{...state, dogs: state.dog.concat(action.payload)}
         default:

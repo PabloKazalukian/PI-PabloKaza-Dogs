@@ -7,16 +7,19 @@ import {getDogs,getDog} from '../../redux/actions/index';
 
 function Dog(props){
     const [dogs,setDogs] = useState();
-    const dogss = useSelector(state => state.dog);
+    const dogss = useSelector(state => state.dogs);
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(getDog())
-    },[dispatch])
+        dispatch(getDogs())
+    },[]);
+    console.log(dogss)
     return (
         <div>
-            <div>
-                <h1>Dog</h1>
-            </div>
+            <h4>{props.name}</h4>
+            <p>Tamaño: {props.height} Cm</p>
+            <p>Peso: {props.weight} Kg</p>
+            <p>Temperamento: {props.temperament}</p>
+
         </div>
     )
 }

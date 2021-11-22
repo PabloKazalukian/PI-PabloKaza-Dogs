@@ -10,6 +10,9 @@ export const getDogs = () =>{
         .then(json=>{
             dispatch({type:GET_DOGS, payload: json});
         })
+        .catch(err=>{
+            console.log(err);
+        })
     }    
 }
 export const getDog = () =>{
@@ -18,6 +21,9 @@ export const getDog = () =>{
         .then(r => r.json())
         .then(json=>{
             dispatch({type:GET_DOG, payload: json});
+        })
+        .catch(err=>{
+            console.log(err);
         })
     }
     

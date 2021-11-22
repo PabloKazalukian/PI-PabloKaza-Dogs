@@ -1,24 +1,24 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import {getDogs} from '../../redux/actions/index';
+import {getDogs,getDog} from '../../redux/actions/index';
 
 
 
-function Dogs(props){
+function Dog(props){
     const [dogs,setDogs] = useState();
-    const dogss = useSelector(state => state.dogs);
+    const dogss = useSelector(state => state.dog);
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(getDogs())
+        dispatch(getDog())
     },[dispatch])
     return (
         <div>
             <div>
-                <h1>casacol</h1>
+                <h1>Dog</h1>
             </div>
         </div>
     )
 }
 
-export default Dogs;
+export default Dog;

@@ -38,7 +38,8 @@ router.get('/',async (req,res,next)=>{
                     height: dogs.height.metric,
                     weight: dogs.weight.metric,
                     life_span: dogs.life_span,
-                    temperament: dogs.temperament
+                    temperament: dogs.temperament,
+                    images: dogs.reference_image_id
                 }
             })
             let allDogs = [...filterDogs,...dogsDb];
@@ -67,7 +68,6 @@ router.get('/:idRaza',async (req,res,next)=>{
             if(dog.id.toString() === idRaza) return dog
         })
         res.send(dogsApi);
-
     }
 })
 

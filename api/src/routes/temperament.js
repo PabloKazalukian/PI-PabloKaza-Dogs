@@ -20,7 +20,7 @@ router.get('/',async (req,res,next)=>{
             let arrTemp = dogsPromiseApi.data.map(temp=>{
                 return temp.temperament?.split(', ').map( async(tempi)=>{
                     await Temperament.findOrCreate({
-                        where:{ name: tempi}
+                        where:{ name: tempi.toLowerCase()}
                     })
                 })
             })

@@ -15,9 +15,12 @@ export const getDogs = () =>{
         })
     }    
 }
-export const getDog = () =>{
+
+//obtiene un perro por query pero manda a dogs
+export const getDog = (search) =>{
+    
     return function(dispatch){
-        return fetch(`http://localhost:3001/api/dog`)
+        return fetch(`http://localhost:3001/api/dogs?name=${search.dogSearch}`)
         .then(r => r.json())
         .then(json=>{
             dispatch({type:GET_DOG, payload: json});

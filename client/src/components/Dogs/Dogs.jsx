@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import {getDogs} from '../../redux/actions/index';
 import Dog from "../Dog/Dog";
-
+import {Doggies} from './DogsComp'
 
 
 function Dogs(props){
@@ -12,17 +12,23 @@ function Dogs(props){
     const dispatch = useDispatch();
     useEffect(()=>{
         dispatch(getDogs())
-    },[dispatch])
+    },[])
     return (
         <div>
+            <Doggies>
             {
                 dogss && dogss.map((dog)=>{
                     return <Dog name={dog.name} 
                     height={dog.height}
                     weight={dog.weight}
-                    temperament={dog.temperament} />
+                    temperament={dog.temperament}
+                    images={dog.images}
+                    key={dog.id} />
+
                 })
             }
+            </Doggies>
+            
             
         </div>
     )

@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import {getDogs} from '../../redux/actions/index';
 import Dog from "../Dog/Dog";
-import {Doggies} from './DogsComp'
+import {OrderDog,Doggies} from './DogsComp'
 
 
 function Dogs(props){
@@ -15,6 +15,13 @@ function Dogs(props){
     },[])
     return (
         <div>
+            <OrderDog > 
+                <p>Ordenamiento Por:</p>
+                <select >
+                    <option value="ascendente">Ascendente</option>
+                    <option value="descendente" >Descendente</option>
+                </select>
+            </OrderDog>
             <Doggies>
             {
                 dogss && dogss.map((dog)=>{

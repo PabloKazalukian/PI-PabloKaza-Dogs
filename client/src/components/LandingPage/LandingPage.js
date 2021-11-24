@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ContainerButton = styled.div`
@@ -8,7 +9,7 @@ export const ContainerButton = styled.div`
     width: 100%;
     background: #d8eefe;
 `
-export const Button = styled.button`
+export const Button = styled(Link)`
     display: inline-flex;
     width: 100px;
     min-width: 270px;
@@ -21,9 +22,10 @@ export const Button = styled.button`
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    text-decoration: none;
     
     &:after {        
-        content: 'Wacho';
+        content: 'Wachin';
         font-size: 50px;
         color: #fff;
         font-family: 'Ubuntu', sans-serif;
@@ -33,8 +35,8 @@ export const Button = styled.button`
         transition: .3s;
     }
     &:hover::after{
-	top: 10px;
-}
+	    top: 10px;
+    }
     `;
 
 

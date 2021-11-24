@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import {getDog} from '../../redux/actions/index';
 
-import {NaviBar,SearchBar,NavUl,InputBar,ButtonBar} from './NavegationBar.js'
+import {Lin,NaviBar,SearchBar,NavUl,InputBar,ButtonBar} from './NavegationBar.js'
 
 export default function NavBar(){
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export default function NavBar(){
         <header className="navBar">
             <NaviBar>
                 <NavUl>
-                    <li>Home</li>
+                    <Lin to={'/'}>Home</Lin>
                     <SearchBar onSubmit={handleSubmit}>
                         <InputBar 
                             type="text"
@@ -39,7 +39,7 @@ export default function NavBar(){
                             type="search" />
                         <ButtonBar type="submit" value="buscar perros"/>
                     </SearchBar>
-                    <li>Perritos Drogados</li>
+                    <Lin to={'/Api'}>Perritos Drogados</Lin>
                 </NavUl>
             </NaviBar>
         </header>

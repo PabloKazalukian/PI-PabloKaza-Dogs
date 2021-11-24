@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const NaviBar = styled.nav`
@@ -10,12 +11,13 @@ export const NaviBar = styled.nav`
 
     `
 export const NavUl = styled.ul`
+    box-sizing: border-box;
     display: flex;
     width: 100%;
     height: 65px;    
     margin: 0px;
     position:fixed;
-    background: #3da9fc;
+    background: #094067;
     flex-direction: row;
     justify-content:center;
     align-items: center;
@@ -23,7 +25,7 @@ export const NavUl = styled.ul`
     padding: 0px 20px;
 `
 export const SearchBar = styled.form`
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -39,4 +41,17 @@ export const ButtonBar = styled.input`
     width: 20%;
     box-sizing: border-box;
     padding:0px 15px;
+`
+export const Lin = styled(Link)`
+    box-sizing: border-box;
+    background-color: #ef4565;
+    margin: 0px;
+    text-decoration: none;
+    width: 10%;
+    height: 50px;
+    color: #fffffe;
+    padding: 12px 0px;
+    text-align: center;
+    font-weight:700;
+    border-radius:3px;
 `

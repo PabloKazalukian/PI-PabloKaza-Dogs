@@ -3,15 +3,17 @@ import './App.css';
 import NavBar from './components/NavBar/NavBar';
 import { Route } from "react-router-dom";
 import Dogs from './components/Dogs/Dogs';
-import LandingPage from './components/LandingPage/LandingPage'
+import LandingPage from './components/LandingPage/LandingPage.jsx'
+import DogsDetail from './components/DogsDetail/DogsDetail.jsx'
 
 
 function App() {
   return (
     <React.Fragment>
       <Route exact path={'/'} component={LandingPage}/>
-      <Route path={'/api'} component={ NavBar}/>
-      <Route exact path={'/api/dogs'} component={Dogs}/>
+      <Route path={'/Api'} component={ NavBar}/>
+      <Route exact path={'/Api/:id'} component={DogsDetail}/>      
+      <Route exact path={'/Api/'} component={Dogs}/>
     </React.Fragment>
   );
 }

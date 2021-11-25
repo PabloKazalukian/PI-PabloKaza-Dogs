@@ -1,7 +1,8 @@
-import {ADD_DOG,GET_DOGS,GET_DOG,SORT} from '../actions/index'
+import {ADD_DOG,GET_DOGS,GET_DOG,SORT,GET_TEMP,FILTER_TEMP} from '../actions/index'
 let initalState={
     dogs:[],
-    dog:[]
+    dog:[],
+    temp:[],
 }
 
 export default function rootReducer(state=initalState,action){
@@ -13,14 +14,16 @@ export default function rootReducer(state=initalState,action){
                         dog: action.payload }
             // }
         case GET_DOG:
-            return{...state, dogs: action.payload}
+            return{...state, dog: action.payload}
 
         case ADD_DOG:
-            return{...state, dogs: action.payload}
+            return{...state, dog:  action.payload}
+        case GET_TEMP:
+            return {...state, temp: action.payload}
         case SORT: 
         //Siempre pregunta si es ascendente
         //Si lo es lo ordena de una forma, o la otra
-                let ordernamientoDog = [...state.dogs];
+                let ordernamientoDog = [...state.dog];
                 ordernamientoDog = ordernamientoDog.sort((a, b)=> {
                     if (a.name < b.name) {
                         return action.payload === 'ascendente'? -1 : 1;
@@ -31,7 +34,15 @@ export default function rootReducer(state=initalState,action){
                     return 0;
                 })
             return{...state,
-                 dogs: ordernamientoDog}
+                 dog: ordernamientoDog}
+        case FILTER_TEMP:
+
+            return {...state, 
+                    dog: state.dogs.filter( e =>{
+                        return e.temperament?.
+                        split(', ').
+                        find(elem => elem.toLowerCase() === action.payload)})}
+
         default:
              return state;
     }

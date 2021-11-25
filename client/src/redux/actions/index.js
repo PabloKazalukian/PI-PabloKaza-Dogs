@@ -2,6 +2,8 @@ export const ADD_DOG = 'ADD_DOG';
 export const GET_DOGS = 'GET_DOGS';
 export const GET_DOG = 'GET_DOG';
 export const SORT = 'SORT';
+export const GET_TEMP = 'GET_TEMP';
+export const FILTER_TEMP = 'FILTER_TEMP';
 
 
 
@@ -36,6 +38,24 @@ export const getDog = (search) =>{
     
 }
 
+export const addDogs = (dog) =>{
+    return function(dispatch){
+        return fetch(`http://localhost:3001/api/dog`, {
+            method: 'POST',
+            body: JSON.stringify(dog),
+            headers:{
+                'Content-Type': 'application/json'},
+             })
+        .then(r => r.json())
+        .then(json=>{
+            console.log(json);
+            dispatch({type:ADD_DOG, payload: json});
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }    
+}
 
 export const getDogById = (id) =>{
     
@@ -57,6 +77,30 @@ export const sort = (order) => {
     return {
         type: SORT,
         payload: order,
+    }
+
+}
+
+
+export const getTemperament = () => {
+    getDogs()
+    return function(dispatch){
+        return fetch(`http://localhost:3001/api/temperament`)
+        .then(r => r.json())
+        .then(json=>{
+            dispatch({type:GET_TEMP, payload: json});
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+}
+
+export const filterTemp = (temp) => {
+    
+    return {
+        type: FILTER_TEMP,
+        payload: temp,
     }
 
 }

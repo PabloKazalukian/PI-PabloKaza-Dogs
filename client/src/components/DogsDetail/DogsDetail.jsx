@@ -1,18 +1,17 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import {useParams} from 'react-router'
-import { useDispatch,useSelector } from "react-redux";
-import {getDogs,getDog} from '../../redux/actions/index';
 import {Doggi} from '../Dog/imgDog';
 
 
 function Dog(){
 
     const[dog,SetDog] = useState(null)
-    let params = useParams();
+    let {id} = useParams();
     // let dog='';
+    //datazo, useEffect no puede ser async, aca lo manejo con el then
     useEffect(()=>{
-        fetch(`http://localhost:3001/api/dogs/${params.id}`)
+        fetch(`http://localhost:3001/api/dogs/${id}`)
         .then(r => r.json())
         .then(json=>{SetDog({
             ...dog,

@@ -1,13 +1,12 @@
 import React from "react";
-import { useState,useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch} from "react-redux";
 import {getDog} from '../../redux/actions/index';
 
 import {Lin,NaviBar,SearchBar,NavUl,InputBar,ButtonBar} from './NavegationBar.js'
 
 export default function NavBar(){
     const dispatch = useDispatch();
-    const dogss = useSelector(state => state.dog);
     const initialState ={
         dogSearch: ""
     }

@@ -8,7 +8,8 @@ function Dog(props){
         <div>
             <Doggi>
                 <h4>{props.name}</h4>
-                <img style={{width: '150px'}} 
+                <img 
+                    style={{width: '150px'}} 
                     src={`https://cdn2.thedogapi.com/images/${props.images}.jpg`} 
                     alt={props.name}
                     onError={(e)=>{

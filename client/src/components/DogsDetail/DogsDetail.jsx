@@ -10,7 +10,6 @@ function Dog(){
 
     const[dog,SetDog] = useState(null)
     let params = useParams();
-    console.log(params.id);
     // let dog='';
     useEffect(()=>{
         fetch(`http://localhost:3001/api/dogs/${params.id}`)
@@ -21,7 +20,6 @@ function Dog(){
         })})
         .catch(err=>{console.log(err);})
     },[])
-    console.log(dog);
     return (
         <div>
 

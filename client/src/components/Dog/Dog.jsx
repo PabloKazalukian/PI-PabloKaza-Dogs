@@ -1,8 +1,5 @@
 import React from "react";
-import { useState,useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import {getDogs,getDog} from '../../redux/actions/index';
-import {Doggi} from './imgDog';
+import {LinkDog,Doggi} from './imgDog';
 
 
 
@@ -21,6 +18,7 @@ function Dog(props){
                 <p>Tamaño: {props.height} Cm</p>
                 <p>Peso: {props.weight} Kg</p>
                 <p>Temperamento: {props.temperament}</p>
+                <LinkDog to={`/api/${props.id}`}> Ver Mas</LinkDog>
             </Doggi>
         </div>
     )

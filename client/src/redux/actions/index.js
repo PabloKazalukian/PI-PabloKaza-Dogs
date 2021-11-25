@@ -1,6 +1,8 @@
 export const ADD_DOG = 'ADD_DOG';
 export const GET_DOGS = 'GET_DOGS';
 export const GET_DOG = 'GET_DOG';
+export const SORT = 'SORT';
+
 
 
 
@@ -48,4 +50,13 @@ export const getDogById = (id) =>{
         })
     }
     
+}
+
+export const sort = (order) => {
+    
+    return {
+        type: SORT,
+        payload: order,
+    }
+
 }

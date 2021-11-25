@@ -1,7 +1,7 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import {getDogs} from '../../redux/actions/index';
+import {getDogs,sort} from '../../redux/actions/index';
 import Dog from "../Dog/Dog";
 import {OrderDog,Doggies} from './DogsComp'
 
@@ -13,11 +13,14 @@ function Dogs(props){
     useEffect(()=>{
         dispatch(getDogs())
     },[])
+    function selectionChange(e){
+        dispatch(sort(e.target.value))
+    }
     return (
         <div>
             <OrderDog > 
                 <p>Ordenamiento Por:</p>
-                <select >
+                <select name='select' onChange={selectionChange} >
                     <option value="ascendente">Ascendente</option>
                     <option value="descendente" >Descendente</option>
                 </select>
@@ -30,7 +33,8 @@ function Dogs(props){
                     weight={dog.weight}
                     temperament={dog.temperament}
                     images={dog.images}
-                    key={dog.id} />
+                    key={dog.id} 
+                    id={dog.id} />
 
                 })
             }

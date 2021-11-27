@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import {getDogs,sort,getTemperament,filterTemp} from '../../redux/actions/index';
+import {getDogs,sort,getTemperament,filterTemp,sortWeigth} from '../../redux/actions/index';
 import Pagination from "../Pagination/Pagination.jsx";
 import Dog from "../Dog/Dog";
 import {OrderDog,Doggies,PaginationDog,ButtonDog} from './DogsComp'
 
 
 function Dogs(props){
+
     const [page,setPage] = useState([]);//post
     const [loading,setLoading] = useState((false));
     const [currentPage,setCurrentPage] = useState(1);
@@ -35,15 +36,23 @@ function Dogs(props){
         dispatch(sort(e.target.value));
     }
     function changeTemp(e){
+        if(e.target.value === 'Selecciona una opción') {
+            dispatch(getDogs());
+        }
         dispatch(filterTemp(e.target.value));
     }
-    //Get current post
+
+    function selectionChangeWeigth(e){
+        dispatch(sortWeigth(e.target.value));
+    }
+
+    //Get current post ,Pagination
     const indexOfLastPage = currentPage * cantPage;
     const indexOfFirstPage = indexOfLastPage - cantPage;
     const currentPost = page.slice(indexOfFirstPage,indexOfLastPage);
 
     // Change page
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
   
     return (
         <div>
@@ -52,15 +61,25 @@ function Dogs(props){
                 <p>Filtrar Por:</p>
                 <select name='selectFilter' onChange={changeTemp}  >
 
-                    <option disabled selected>Selecciona una opción</option>                    
+                    <option value='Selecciona una opción'
+                            label={'Selecciona una opción'}/>
+                    
                     { temp && temp.map( (temp)=>{
 
                         return <option value={temp.name} label={temp.name}/>
                         
                     })}
                 </select>
+                
 
-                <p>Ordenamiento Por:</p>
+                <p>Ordenamiento Por Peso:</p>
+                <select name='select' onChange={selectionChangeWeigth} >
+                    <option disabled selected>Selecciona una opción</option>
+                    <option value="mayor" label='mayor a menor'></option>
+                    <option value="menor" label='menor a mayor'></option>
+                </select>
+
+                <p>Ordenamiento Alfabetico:</p>
                 <select name='select' onChange={selectionChange} >
                     <option disabled selected>Selecciona una opción</option>
                     <option value="ascendente" label='Ascendente'></option>
@@ -90,6 +109,7 @@ function Dogs(props){
             
         </div>
     )
+
 }
 
 export default Dogs;

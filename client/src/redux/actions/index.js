@@ -4,6 +4,7 @@ export const GET_DOG = 'GET_DOG';
 export const SORT = 'SORT';
 export const GET_TEMP = 'GET_TEMP';
 export const FILTER_TEMP = 'FILTER_TEMP';
+export const SORT_WEIGHT = 'SORT_WEIGHT';
 
 
 
@@ -76,6 +77,15 @@ export const sort = (order) => {
     
     return {
         type: SORT,
+        payload: order,
+    }
+
+}
+
+export const sortWeigth  = (order) => {
+    
+    return {
+        type: SORT_WEIGHT,
         payload: order,
     }
 

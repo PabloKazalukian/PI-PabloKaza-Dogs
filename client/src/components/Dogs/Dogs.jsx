@@ -25,13 +25,16 @@ function Dogs(props){
         dispatch(getTemperament());
         dispatch(sort('ascendente'));
         setLoading(true);
-        setPage(dogss);
+        setPage(dog1);
         setLoading(false);
 
     },[])
     useEffect(()=>{
+        setLoading(true);
         setPage(dog1);
-    })
+        setLoading(false);
+
+    },[dog1])
     function selectionChange(e){
         dispatch(sort(e.target.value));
     }

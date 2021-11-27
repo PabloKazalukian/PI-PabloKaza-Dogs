@@ -49,7 +49,6 @@ export const addDogs = (dog) =>{
              })
         .then(r => r.json())
         .then(json=>{
-            console.log(json);
             dispatch({type:ADD_DOG, payload: json});
         })
         .catch(err=>{

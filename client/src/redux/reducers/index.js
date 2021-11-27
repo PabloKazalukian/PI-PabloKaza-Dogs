@@ -54,21 +54,21 @@ export default function rootReducer(state=initalState,action){
             orderDog = orderDog.sort((a,b)=>{
                 a =a.weight?.split(' - ');
                 b = b.weight?.split(' - ');
-                if(action.payload === 'mayor'){
+                if(action.payload === 'mayor'){ // usa el ultimo elemento si es mayor
                     positionA= a.length-1;
                     positionB= b.length-1;
-                } else {
+                } else { // usa el primer elemento si es menor
                     positionA= 0;
                     positionB= 0;
                 }
-                console.log(parseInt(a[positionA],10) , parseInt(b[positionB],10) );
                 if (parseInt(a[positionA],10) < parseInt(b[positionB],10) ) {
                     return action.payload === 'mayor'? 1 : -1;
                 }
                 if (parseInt(a[positionA],10) > parseInt(b[positionB],10) ) {
                     return action.payload === 'mayor'? -1 : 1;
                 }
-                return 0;
+                return a[1]?b[1]?  (a[1]<b[1])?-1:1 :1 :-1;
+                //pregunta si existe uno u otro, luego compara segunda posicion si existen.
             })
 
             return {...state, dog: orderDog }

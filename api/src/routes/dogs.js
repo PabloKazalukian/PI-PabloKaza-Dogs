@@ -57,8 +57,8 @@ router.get('/:idRaza',async (req,res,next)=>{
     
     if(typeof idRaza === 'string' && idRaza.length>8 ){
         //Base de Datos
-        // const dogPK = await Dog.findByPk(idRaza,{include: Temperament})
-        // return res.res(dogPK);
+        const dogPK = await Dog.findByPk(idRaza,{include: Temperament})
+        return res.res(dogPK);
     } else{
         //Api
         // const dogsPromiseApi = await axios.get(`https://api.thedogapi.com/v1/breeds/${idRaza}?api_key=${YOUR_API_KEY}`);

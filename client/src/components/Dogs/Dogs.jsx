@@ -26,13 +26,11 @@ function Dogs(props){
         dispatch(sort('ascendente'));
         setLoading(true);
         setPage(dog1);
-        setLoading(false);
 
     },[])
     useEffect(()=>{
         setLoading(true);
         setPage(dog1);
-        setLoading(false);
 
     },[dog1])
     function selectionChange(e){

@@ -4,12 +4,11 @@ const { DataTypes,Sequelize } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('temperament', {
-    id:{
-      type:DataTypes.UUID,
-      primaryKey: true,
-      allowNull: false,
-      defaultValue: DataTypes.UUIDV4,
-    },
+    // id:{
+    //   type:DataTypes.id,
+    //   primaryKey: true,
+    //   allowNull: false,
+    // },
     name: {
       type: DataTypes.STRING,
     },

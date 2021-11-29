@@ -6,7 +6,7 @@ import {getDog} from '../../redux/actions/index';
 
 import {Lin,NaviBar,SearchBar,NavUl,InputBar,ButtonBar} from './NavegationBar.js'
 
-export default function NavBar(props){
+export default function NavBar(){
     const dispatch = useDispatch();
     const initialState ={
         dogSearch: ""

@@ -1,10 +1,11 @@
 import React from 'react';
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
 import { } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
+import {FormDoggies,Container} from './DogForm';
 
 
-const CreateHouse = () => {
+const DogForm = () => {
     const dispatch = useDispatch()
     const initialState ={
         name: "",
@@ -12,6 +13,7 @@ const CreateHouse = () => {
         weight: "",
         life_span:"",
         images:"",
+        teperament:[],
     }
   const [state, setstate] = React.useState(initialState);
 
@@ -39,20 +41,24 @@ const CreateHouse = () => {
     addDogs(state)
   }
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Name: </label>
-            <input name='name' onChange={handleState} value={state.name}/>
-            <label>Height: </label>
-            <input name='height' onChange={handleState} value={state.height}/>
-            <label>Weight: </label>
-            <input name='weight' onChange={handleState} value={state.weight}/>
-            <label>Life span: </label>
-            <input name="life_span" onChange={handleState} value={state.life_span} />
-            <label>Images: </label>            
-            <input name="images" onChange={handleState} value={state.images} />
-            <button type='submit'>Create</button>
-        </form>
+        <Container>
+          <FormDoggies onSubmit={handleSubmit}>
+              <label>Name: </label>
+              <input name='name' onChange={handleState} value={state.name}/>
+              <label>Height: </label>
+              <input name='height' onChange={handleState} value={state.height}/>
+              <label>Weight: </label>
+              <input name='weight' onChange={handleState} value={state.weight}/>
+              <label>Life span: </label>
+              <input name="life_span" onChange={handleState} value={state.life_span} />
+              <label>Images: </label>            
+              <input name="images" onChange={handleState} value={state.images} />
+              <label>teperament: </label>            
+              <input name="images" onChange={handleState} value={state.teperament} />
+              <button type='submit'>Create</button>
+          </FormDoggies>
+        </Container>
     );
 };
 
-export default CreateHouse;
+export default DogForm;

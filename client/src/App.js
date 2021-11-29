@@ -5,7 +5,7 @@ import { Route } from "react-router-dom";
 import Dogs from './components/Dogs/Dogs';
 import LandingPage from './components/LandingPage/LandingPage.jsx'
 import DogsDetail from './components/DogsDetail/DogsDetail.jsx'
-import DogsForm from './components/DogForm/DogForm'
+import DogForm from './components/DogForm/DogForm.jsx'
 
 
 function App() {
@@ -13,9 +13,9 @@ function App() {
     <React.Fragment>
       <Route exact path={'/'} component={LandingPage}/>
       <Route path={'/Api'} component={ NavBar}/>
-      <Route exact path={'/Api/:id'} component={DogsDetail}/>      
+      <Route exact path={'/Api/search/:id'} component={DogsDetail}/>      
       <Route exact path={'/Api/'} component={Dogs}/>
-      <Route exact path={'/Api/Form'} component={DogsForm}/>
+      <Route exact path={'/Api/Form'} component={DogForm}/>
 
     </React.Fragment>
   );

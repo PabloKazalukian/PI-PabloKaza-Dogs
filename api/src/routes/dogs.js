@@ -42,7 +42,21 @@ router.get('/',async (req,res,next)=>{
                     images: dogs.reference_image_id
                 }
             })
-            let allDogs = [...filterDogs,...dogsDb];
+            let filterDbDogs = dogsPromiseDb.map((dogs)=>{
+                return {
+                    id : dogs.id,
+                    name: dogs.name,
+                    height: dogs.height,
+                    weight: dogs.weight,
+                    life_span: dogs.life_span,
+                    images: dogs.images,
+                    temperament: dogs.temperaments.map((temp)=>{
+                        return temp.name
+                    }).join(', ')
+                }
+            })
+
+            let allDogs = [...filterDogs,...filterDbDogs];
             res.send(allDogs);
         })
     }
@@ -58,7 +72,7 @@ router.get('/:idRaza',async (req,res,next)=>{
     if(typeof idRaza === 'string' && idRaza.length>8 ){
         //Base de Datos
         const dogPK = await Dog.findByPk(idRaza,{include: Temperament})
-        return res.res(dogPK);
+        return res.send(dogPK);
     } else{
         //Api
         // const dogsPromiseApi = await axios.get(`https://api.thedogapi.com/v1/breeds/${idRaza}?api_key=${YOUR_API_KEY}`);

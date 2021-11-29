@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const {Dog}= require('../db');
+const {Dog,Temperament}= require('../db');
+// const Temperament = require('../models/Temperament');
 const router = Router();
 
 router.get('/',(req,res,next)=>{
-    return Dog.findAll()
+    return Dog.findAll({include:[{model:Temperament,as:'temperaments'}]})
     .then((dog)=>{
         res.send(dog)
     })
@@ -11,11 +12,20 @@ router.get('/',(req,res,next)=>{
         next(err)
     })
 });
+const  agregandoTemps = async (temperament)=>{
+    const temp = await temperament.map(async(temp)=>{
+        await Temperament.findOrCreate({
+        where:{name:temp}
+    })})
+    return temp
+}
 
 router.post('/', async(req,res,next)=>{
     try{
-        const {name,height,weight,life_span} = req.body;
-        const newPerrito = await Dog.create({name,height,weight,life_span});
+        const {name,height,weight,life_span,temperament,images} = req.body;        
+        const newPerrito = await Dog.create({name,height,weight,life_span,images});
+        console.log(temperament);
+        await newPerrito.addTemperament(temperament);
         res.send(newPerrito);
     }
     catch(err){

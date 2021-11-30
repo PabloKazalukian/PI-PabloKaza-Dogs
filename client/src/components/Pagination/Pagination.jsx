@@ -5,6 +5,7 @@ import {ContainerNav,ContainerUl,ButtonPage} from './Pagination'
 const Pagination = ({ cantPage, totalPage, paginate }) => {
   const pageNumbers = [];
 
+  
   for (let i = 1; i <= Math.ceil(totalPage / cantPage); i++) {
     pageNumbers.push(i);
   }

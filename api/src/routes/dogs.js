@@ -71,7 +71,8 @@ router.get('/:idRaza',async (req,res,next)=>{
     
     if(typeof idRaza === 'string' && idRaza.length>8 ){
         //Base de Datos
-        const dogPK = await Dog.findByPk(idRaza,{include: Temperament})
+        const dogPK = await Dog.findByPk(idRaza,{include: Temperament});
+        dogPK.temperaments = dogPK?.temperaments.map((temp)=>{ return temp.dataValues.name});
         return res.send(dogPK);
     } else{
         //Api

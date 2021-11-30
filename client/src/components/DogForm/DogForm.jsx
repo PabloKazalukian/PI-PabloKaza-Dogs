@@ -1,21 +1,32 @@
 import React from 'react';
-import {useEffect,useState} from 'react'
-import { } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
+import {useEffect, useState} from 'react'
+import { getTemperament} from '../../redux/actions';
+import { useDispatch,useSelector } from 'react-redux';
 import {FormDoggies,Container} from './DogForm';
 
 
 const DogForm = () => {
-    const dispatch = useDispatch()
-    const initialState ={
-        name: "",
-        height: "",
-        weight: "",
-        life_span:"",
-        images:"",
-        teperament:[],
-    }
-  const [state, setstate] = React.useState(initialState);
+  const dispatch = useDispatch();
+  const temp = useSelector(state => state.temp);
+
+  const initialTemp={
+    temp: []
+  }
+  const initialState ={
+      name: "",
+      height: "",
+      weight: "",
+      life_span:"",
+      images:"",
+      temperament:[],
+  }
+
+  useEffect(()=>{
+    dispatch(getTemperament());
+  },[])
+  const [state, setstate] = useState(initialState);
+  const [tempShow, setTempShow] = useState(initialTemp);
+
 
   const handleState = (e) =>{
     setstate({
@@ -23,6 +34,7 @@ const DogForm = () => {
       [e.target.name]: e.target.value
       });
     }
+
   const addDogs = (dog) =>{
     return fetch(`http://localhost:3001/api/dog`, {
       method: 'POST',
@@ -36,29 +48,72 @@ const DogForm = () => {
         console.log(err);
       })          
   }
+
   const handleSubmit = (e) =>{
     e.preventDefault();
+    console.log(state);
     addDogs(state)
   }
-    return (
-        <Container>
-          <FormDoggies onSubmit={handleSubmit}>
-              <label>Name: </label>
-              <input name='name' onChange={handleState} value={state.name}/>
-              <label>Height: </label>
-              <input name='height' onChange={handleState} value={state.height}/>
-              <label>Weight: </label>
-              <input name='weight' onChange={handleState} value={state.weight}/>
-              <label>Life span: </label>
-              <input name="life_span" onChange={handleState} value={state.life_span} />
-              <label>Images: </label>            
-              <input name="images" onChange={handleState} value={state.images} />
-              <label>teperament: </label>            
-              <input name="images" onChange={handleState} value={state.teperament} />
+
+  //debo mostrar el name pero llevar al back el id de los temperament
+  const selectTemp = (e)=>{
+    console.log(typeof e.target.value)
+    if(!state.temperament.includes(e.target.value)){
+
+      setstate({
+        ...state,
+        temperament: [...state.temperament,
+           parseInt(e.target.value,10)]
+      });
+
+      let [item] = temp.filter(elem =>{if (elem.id == (e.target.value)){
+        return elem.name;
+      }});
+      setTempShow({
+        ...state,
+        temp: [...tempShow.temp, item.name]
+      })
+    }else{
+      alert('No vale repetir');
+    }
+  }
+
+  return (
+      <Container>
+        <FormDoggies onSubmit={handleSubmit}>
+            <label>Name: </label>
+            <input name='name' onChange={handleState} value={state.name}/>
+            <label>Height: </label>
+            <input name='height' onChange={handleState} value={state.height}/>
+            <label>Weight: </label>
+            <input name='weight' onChange={handleState} value={state.weight}/>
+            <label>Life span: </label>
+            <input name="life_span" onChange={handleState} value={state.life_span} />
+            <label>Images: </label>            
+            <input name="images" onChange={handleState} value={state.images} />
+            <label>temperament: </label>
+            <select name='selectTemp' onChange={selectTemp}>
+              <option value='Selecciona una opción'
+                  label={'Selecciona una opción'}/>
+                    
+                    { temp && temp.map( (temp)=>{
+                      
+                      return <option name={temp.name} 
+                      key={temp.id}
+                      value={temp.id} 
+                      label={temp.name}/>
+                        
+                    })}
+
+              </select>
+              <div> 
+                {tempShow.temp?.map(e =><p key ={e}>{e}</p>)}
+              </div>
+
               <button type='submit'>Create</button>
-          </FormDoggies>
-        </Container>
-    );
+        </FormDoggies>
+      </Container>
+  );
 };
 
 export default DogForm;

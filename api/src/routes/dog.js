@@ -22,9 +22,8 @@ const  agregandoTemps = async (temperament)=>{
 
 router.post('/', async(req,res,next)=>{
     try{
-        const {name,height,weight,life_span,temperament,images} = req.body;        
+        const {name,height,weight,life_span,temperament,images} = req.body;
         const newPerrito = await Dog.create({name,height,weight,life_span,images});
-        console.log(temperament);
         await newPerrito.addTemperament(temperament);
         res.send(newPerrito);
     }

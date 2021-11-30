@@ -15,22 +15,23 @@ function Dogs(props){
     const [cantPage,setCantPage] = useState(8);//postPerPage
     
 
-    const dogss = useSelector(state => state.dogs);
     const dog1 = useSelector(state => state.dog);
     const temp = useSelector(state => state.temp);
 
     const dispatch = useDispatch();
     useEffect(()=>{
+        setLoading(false);
         dispatch(getDogs());
         dispatch(getTemperament());
         dispatch(sort('ascendente'));
-        setLoading(true);
         setPage(dog1);
+        setLoading(true);
 
     },[])
     useEffect(()=>{
-        setLoading(true);
+        setLoading(false);        
         setPage(dog1);
+        setLoading(true);
 
     },[dog1])
     function selectionChange(e){
@@ -67,7 +68,7 @@ function Dogs(props){
                     
                     { temp && temp.map( (temp)=>{
 
-                        return <option value={temp.name} label={temp.name}/>
+                        return <option key={temp.id} value={temp.name} label={temp.name}/>
                         
                     })}
                 </select>
@@ -94,8 +95,8 @@ function Dogs(props){
                 paginate={paginate}
             />
             <Doggies>
-            {
-                currentPost && currentPost.map((dog)=>{
+            {   
+                currentPost?.map((dog)=>{
                     return <Dog name={dog.name} 
                     height={dog.height}
                     weight={dog.weight}

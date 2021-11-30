@@ -6,12 +6,10 @@ import {LinkDog,Doggi} from './imgDog';
 function Dog(props){
     let imggs=`https://cdn2.thedogapi.com/images/${props.images}.jpg`; 
     if(props.images?.length > 15){
-        console.log('holis');
         imggs = props.images;
-        console.log(imggs);
-    }
+    } 
     return (
-        <div>
+       
             <Doggi>
                 <h4>{props.name}</h4>
                 <img 
@@ -27,7 +25,7 @@ function Dog(props){
                 <p>Temperamento: {props.temperament}</p>
                 <LinkDog to={`/api/search/${props.id}`}> Ver Mas</LinkDog>
             </Doggi>
-        </div>
+       
     )
 }
 

@@ -7,7 +7,7 @@ export default function LandingPage(){
 
     return(
         <ContainerButton>
-            <Button to={'/Api'} class="boton btn18"><Span>Hola!</Span></Button>
+            <Button to={'/Api'} ><Span>Hola!</Span></Button>
         </ContainerButton>
     )
 

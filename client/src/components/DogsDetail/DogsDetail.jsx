@@ -21,8 +21,11 @@ function Dog(){
         })})
         .catch(err=>{console.log(err);})
     },[])
-    console.log(dog);
     const imgg = 'https://cdn2.thedogapi.com/images/';
+    let imggs;
+    if(dog?.dog?.images){
+        imggs = dog.dog.images;
+    }
     return (
         <div>
 
@@ -32,21 +35,19 @@ function Dog(){
                 <DogDetail>
                     <h4>{dog.dog.name}</h4>
                     <img style={{width: '150px'}} 
-                        src={`${imgg}${dog.dog.reference_image_id}.jpg`} 
+                        src={dog.dog.reference_image_id?`${imgg}${dog.dog.reference_image_id}.jpg`:imggs} 
                         alt={dog.dog.name}
                         onError={(e)=>{
                             e.target.onError = null;
                             e.target.src= 'https://i0.wp.com/noticieros.televisa.com/wp-content/uploads/2021/03/cheems-1.jpg?w=1080&ssl=1'
                         }}/>
                     <h2>Tamaño: </h2>
-                    <p>Metrico: {dog.dog.height.metric} Cm</p>
-                    <p>Imperial: {dog.dog.height.imperial} ''</p>
+                    <p>Metrico: {dog.dog.height.metric? dog.dog.height.metric:dog.dog.height } Cm</p>
 
                     <h2>Peso:</h2>
-                    <p>Metrico: {dog.dog.weight.metric} Kg</p>
-                    <p>Imperial: {dog.dog.weight.imperial} </p>
+                    <p>Metrico: {dog.dog.weight.metric? dog.dog.weight.metric: dog.dog.weight} Kg</p>
 
-                    <p>Temperamento: {dog.dog.temperament}</p>
+                    <p>Temperamento: {dog.dog.temperament? dog.dog.temperament:dog.dog.temperaments.map(e=>{ return e.name}).join(', ') }</p>
                     <p>Origen: {dog.dog.origin}</p>
                     <p>life_span: {dog.dog.life_span}</p>
                     <p>bred_for: {dog.dog.bred_for}</p>

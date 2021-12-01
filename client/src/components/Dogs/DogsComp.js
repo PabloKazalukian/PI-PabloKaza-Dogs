@@ -6,6 +6,7 @@ export const Doggies= styled.div`
     align-items: center;
     flex-wrap: wrap;
     background: #d8eefe;
+    min-height: 605px ;
 `;
 export const OrderDog= styled.div`
     display: flex;

@@ -84,11 +84,11 @@ const DogForm = () => {
             <label>Name: </label>
             <input name='name' onChange={handleState} value={state.name}/>
             <label>Height: </label>
-            <input name='height' onChange={handleState} value={state.height}/>
+            <input type="number" name='height' onChange={handleState} value={state.height}/>
             <label>Weight: </label>
-            <input name='weight' onChange={handleState} value={state.weight}/>
+            <input type="number" name='weight' onChange={handleState} value={state.weight}/>
             <label>Life span: </label>
-            <input name="life_span" onChange={handleState} value={state.life_span} />
+            <input type="number" name="life_span" onChange={handleState} value={state.life_span} />
             <label>Images: </label>            
             <input name="images" onChange={handleState} value={state.images} />
             <label>temperament: </label>

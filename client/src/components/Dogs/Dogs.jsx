@@ -31,6 +31,7 @@ function Dogs(props){
     useEffect(()=>{
         setLoading(false);        
         setPage(dog1);
+        setCurrentPage(1);
         setLoading(true);
 
     },[dog1])

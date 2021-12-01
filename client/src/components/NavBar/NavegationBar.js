@@ -8,6 +8,7 @@ export const NaviBar = styled.nav`
     position:relative;
     min-height: 65px;
     background: #3da9fc;
+    z-index: 20;
 
     `
 export const NavUl = styled.ul`

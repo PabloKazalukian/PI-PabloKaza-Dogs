@@ -7,7 +7,7 @@ import {DogDetail} from './DogsDetail'
 
 function Dog(){
 
-    const[dog,SetDog] = useState(null)
+    const[state,SetDog] = useState(null)
     let {id} = useParams();
 
     // let dog='';
@@ -16,42 +16,44 @@ function Dog(){
         fetch(`http://localhost:3001/api/dogs/${id}`)
         .then(r => r.json())
         .then(json=>{SetDog({
-            ...dog,
+            ...state,
             dog: json
         })})
         .catch(err=>{console.log(err);})
     },[])
+    console.log(state);
     const imgg = 'https://cdn2.thedogapi.com/images/';
-    let imggs;
-    if(dog?.dog?.images){
-        imggs = dog.dog.images;
+    let imggs = '';
+    if(state?.dog?.images){
+        imggs = state.dog.images;
     }
+    let desc = 'desconocido';
     return (
         <div>
 
             { 
-                dog ?
+                state ?
                 <>
                 <DogDetail>
-                    <h4>{dog.dog.name}</h4>
+                    <h4>{state.dog.name}</h4>
                     <img style={{width: '150px'}} 
-                        src={dog.dog.reference_image_id?`${imgg}${dog.dog.reference_image_id}.jpg`:imggs} 
-                        alt={dog.dog.name}
+                        src={state.dog.reference_image_id?`${imgg}${state.dog.reference_image_id}.jpg`:imggs}
+                        alt={state.dog.name}
                         onError={(e)=>{
                             e.target.onError = null;
                             e.target.src= 'https://i0.wp.com/noticieros.televisa.com/wp-content/uploads/2021/03/cheems-1.jpg?w=1080&ssl=1'
                         }}/>
                     <h2>Tamaño: </h2>
-                    <p>Metrico: {dog.dog.height.metric? dog.dog.height.metric:dog.dog.height } Cm</p>
+                    <p>{state.dog.height.metric? state.dog.height.metric:state.dog.height } Cm</p>
 
                     <h2>Peso:</h2>
-                    <p>Metrico: {dog.dog.weight.metric? dog.dog.weight.metric: dog.dog.weight} Kg</p>
+                    <p>{state.dog.weight.metric? state.dog.weight.metric: state.dog.weight} Kg</p>
 
-                    <p>Temperamento: {dog.dog.temperament? dog.dog.temperament:dog.dog.temperaments.map(e=>{ return e.name}).join(', ') }</p>
-                    <p>Origen: {dog.dog.origin}</p>
-                    <p>life_span: {dog.dog.life_span}</p>
-                    <p>bred_for: {dog.dog.bred_for}</p>
-                    <p>breed_group: {dog.dog.breed_group}</p>
+                    <p>Temperamento: {state.dog.temperament? state.dog.temperament:state.dog.temperaments?.map(e=>{ return e.name}).join(', ') }</p>
+                    <p>Origen: {state.dog.origin? state.dog.origin : desc }</p>
+                    <p>Esperanza de vida: {state.dog.life_span? state.dog.life_span +' años': desc}</p>
+                    <p>Criado Para: {state.dog.bred_for? state.dog.bred_for : desc}</p>
+                    <p>Grupo de Raza: {state.dog.breed_group? state.dog.breed_group : desc}</p>
 
                     
                 </DogDetail>

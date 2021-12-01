@@ -9,6 +9,8 @@ export const Doggi= styled.div`
     background: #90b4ce97;
     margin: 15px;
     border-radius: 5px;
+    box-shadow: 0px 0px 75px 2px rgba(144,180,206,1);
+
     & p {
         text-align: center;
     }    
@@ -48,7 +50,12 @@ export const DogInfo = styled.div`
     align-items: center;
     height: 290px;
     padding:20px 10px 60px 10px;
-
+    & p{
+        display: block;
+        background: #3331;
+        padding: 5px 0px;
+        width: 100%;;
+    }
 
 `
 export const LinkDog= styled(Link)`

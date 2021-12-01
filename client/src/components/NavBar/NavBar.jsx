@@ -30,7 +30,8 @@ export default function NavBar(){
         <header className="navBar">
             <NaviBar>
                 <NavUl>
-                    <Lin to={'/'}>Home</Lin>
+                    {/* <Lin to={'/'}>Home</Lin> */}
+                    <Lin to={'/Api'}>Perritos </Lin>
                     { pathname.toLowerCase() === '/api' ?
                         <SearchBar onSubmit={handleSubmit}>
                             <InputBar 
@@ -41,9 +42,8 @@ export default function NavBar(){
                                 type="search" />
                             <ButtonBar type="submit" value="buscar perros"/>
                         </SearchBar>
-                        : <h4>E</h4>
+                        : <p/> 
                     }
-                    <Lin to={'/Api'}>Perritos </Lin>
                     <Lin to={'/Api/Form'}>Agregar </Lin>
 
                 </NavUl>

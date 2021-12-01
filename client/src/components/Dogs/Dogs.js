@@ -7,6 +7,8 @@ export const Doggies= styled.div`
     flex-wrap: wrap;
     background: #d8eefe;
     min-height: 605px ;
+    gap: 10px;
+    padding-bottom: 20px;
 `;
 export const OrderDog= styled.div`
     display: flex;

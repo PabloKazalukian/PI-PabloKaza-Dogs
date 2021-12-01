@@ -34,12 +34,13 @@ export const DogImg = styled.div`
     & h4{
         position: absolute;
         z-index: 1;
-        top: 450px;
+        top: 400px;
         left: 0;
         color: #d8eefe;
-        font-size: 1.7rem;
+        font-size: 2rem;
         width: 100%;
         text-align: center;
+        backdrop-filter: blur(5px);
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0, 0.4);
     }
@@ -54,10 +55,35 @@ export const DogImg = styled.div`
     }
 `;
 export const DogDescription = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    background: red;
     width: 40%;
-    flex-direction: column;
-
+    grid-template-areas:"description description"
+                        "height weight"
+                        "temperament temperament"
+                        "others others";
+    text-align: center;
+    padding: 20px;
+    background: #094067;
+    color: #fffffe;
+`;
+export const Desc  = styled.div`
+    grid-area: description;
+    border: 1px solid #90b4ce;
+`;
+export const Heigth  = styled.div`
+    grid-area: height;
+    border: 1px solid #90b4ce;
+`;
+export const Weigth = styled.div`
+    border: 1px solid #90b4ce;
+    grid-area: weight;
+`;
+export const Temperament = styled.div`
+    border: 1px solid #90b4ce;
+    grid-area: temperament;
+`;
+export const Others = styled.div`
+    grid-area: others;
+    border: 1px solid #90b4ce;
 `;

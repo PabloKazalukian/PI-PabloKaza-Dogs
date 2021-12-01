@@ -20,7 +20,7 @@ export const NavUl = styled.ul`
     position:fixed;
     background: #094067;
     flex-direction: row;
-    justify-content:center;
+    justify-content: space-between;
     align-items: center;
     list-style:none;
     padding: 0px 20px;

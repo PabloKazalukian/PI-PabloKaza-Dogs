@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {LinkDog,Doggi,DogDiv,DogInfo} from './imgDog';
+import {LinkDog,Doggi,DogDiv,DogInfo} from './DogCard';
 
 
 
@@ -12,7 +12,6 @@ function Dog(props){
        
             <Doggi>
                 <DogDiv>
-                    <h4>{props.name}</h4>
                     <img 
                         src={imggs} 
                         alt={props.name}
@@ -22,11 +21,12 @@ function Dog(props){
                         }}/>
                 </DogDiv>
                 <DogInfo>
+                    <h4>{props.name}</h4>
                     <p>Tamaño: {props.height} Cm</p>
                     <p>Peso: {props.weight} Kg</p>
                     <p>Temperamento: {props.temperament}</p>
+                    <LinkDog to={`/api/search/${props.id}`}> Ver Mas</LinkDog>
                 </DogInfo>
-                <LinkDog to={`/api/search/${props.id}`}> Ver Mas</LinkDog>
             </Doggi>
        
     )

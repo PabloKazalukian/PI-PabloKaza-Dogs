@@ -4,7 +4,7 @@ import { useDispatch,useSelector } from "react-redux";
 import {getDogs,sort,getTemperament,filterTemp,sortWeigth} from '../../redux/actions/index';
 import Pagination from "../Pagination/Pagination.jsx";
 import Dog from "../Dog/Dog";
-import {OrderDog,Doggies,PaginationDog,ButtonDog} from './DogsComp'
+import {OrderDog,Doggies,PaginationDog,ButtonDog} from './Dogs'
 
 
 function Dogs(props){
@@ -108,6 +108,11 @@ function Dogs(props){
                 })
             }
             </Doggies>
+            <Pagination
+                cantPage={cantPage}
+                totalPage={page.length}
+                paginate={paginate}
+            />
             
             
         </div>

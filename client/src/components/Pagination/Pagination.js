@@ -31,8 +31,9 @@ export const ButtonPage = styled.button`
     border: 1px solid #333;
     cursor: pointer;
 
-    &:active{
+    &:focus{
         background: red;
+        color: #fff;
     }
 `;
 

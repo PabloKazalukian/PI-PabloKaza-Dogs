@@ -1,7 +1,10 @@
 import React from "react";
 import { useState,useEffect } from "react";
 import {useParams} from 'react-router'
-import {DogDetail,Container,DogDescription,DogImg} from './DogsDetail'
+import Loading from '../Loading/Loading.jsx'
+
+import {DogDetail,Container,DogDescription,DogImg,
+    Desc,Heigth,Weigth,Temperament,Others} from './DogsDetail'
 
 
 function Dog(){
@@ -45,24 +48,38 @@ function Dog(){
                             <h4>{state.dog.name}</h4>
                         </DogImg>
                         <DogDescription>
-                            <h2>Description</h2>
-                            <h2>Tamaño: </h2>
-                            <p>{state.dog.height.metric? state.dog.height.metric:state.dog.height } Cm</p>
-
-                            <h2>Peso:</h2>
-                            <p>{state.dog.weight.metric? state.dog.weight.metric: state.dog.weight} Kg</p>
-
-                            <p>Temperamento: {state.dog.temperament? state.dog.temperament:state.dog.temperaments?.map(e=>{ return e.name}).join(', ') }</p>
-                            <p>Origen: {state.dog.origin? state.dog.origin : desc }</p>
-                            <p>Esperanza de vida: {state.dog.life_span? state.dog.life_span +' años': desc}</p>
-                            <p>Criado Para: {state.dog.bred_for? state.dog.bred_for : desc}</p>
-                            <p>Grupo de Raza: {state.dog.breed_group? state.dog.breed_group : desc}</p>
-                        </DogDescription>
-                        
+                            <Desc>
+                                <h2>Description</h2>
+                            </Desc>
+                            <Heigth>
+                                <h2>Tamaño: </h2>
+                                <p>{state.dog.height.metric? 
+                                state.dog.height.metric:
+                                state.dog.height } Cm</p>
+                            </Heigth>
+                            <Weigth>
+                                <h2>Peso:</h2>
+                                <p>{state.dog.weight.metric?
+                                 state.dog.weight.metric: 
+                                 state.dog.weight} Kg</p>
+                            </Weigth>
+                            <Temperament>
+                                <h2>Temperamento:</h2>
+                                <p>{state.dog.temperament?
+                                 state.dog.temperament:
+                                 state.dog.temperaments?.map(e=>{ return e.name}).join(', ') }</p>
+                            </Temperament>
+                            <Others>
+                                <p>Origen: {state.dog.origin? state.dog.origin : desc }</p>
+                                <p>Esperanza de vida: {state.dog.life_span? state.dog.life_span : desc}</p>
+                                <p>Criado Para: {state.dog.bred_for? state.dog.bred_for : desc}</p>
+                                <p>Grupo de Raza: {state.dog.breed_group? state.dog.breed_group : desc}</p>
+                            </Others>
+                        </DogDescription>                        
                     </DogDetail>
                 </Container>
                 </> :                
-                <h1>Loading</h1>
+                <Loading/>
 
             }
             

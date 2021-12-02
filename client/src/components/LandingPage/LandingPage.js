@@ -16,9 +16,10 @@ const Animation = keyframes`
 export const Container = styled.div`
     box-sizing: border-box;
     width: 100%;
-    border: 50px solid #77777777;
+    height: 100vh;
     position: relative;
-    background-image: url('https://media-cldnry.s-nbcnews.com/image/upload/t_fit-560w,f_auto,q_auto:best/newscms/2020_28/1587661/dogs-age-years-kb-inline-200707.jpg');
+    background-image: url('https://comoeducarauncachorro.com/blog/wp-content/uploads/2013/06/cac1.jpg');
+    /* background-image: url('https://www.purina-latam.com/sites/g/files/auxxlc391/files/styles/kraken_generic_max_width_960/public/purina-por-que-mi-perro-no-quiere-comer.jpg'); */
     background-repeat: no-repeat; 
     background-size: cover;
 
@@ -26,19 +27,14 @@ export const Container = styled.div`
 export const Texto = styled.h1`
     position: absolute;
     top: 250px;
-    left: 0;
+    left: 0px;
     z-index: 5;
     width: 100%;
-    color: transparent;
+    color: #333;
     text-align: center;
     text-transform: uppercase;
     font-size: 150px;
     padding: 0px;
-    background-image: url('https://www.purina-latam.com/sites/g/files/auxxlc391/files/styles/kraken_generic_max_width_960/public/purina-por-que-mi-perro-no-quiere-comer.jpg');
-    background-repeat: no-repeat; 
-    background-size: cover;
-    background-clip: text;
-    -webkit-background-clip: text;
 `;
 export const Text = styled.h1`
     position: absolute;
@@ -46,17 +42,11 @@ export const Text = styled.h1`
     left: 0;
     z-index: 5;
     width: 100%;
-    color: transparent;
+    color: #333;
     text-align: center;
     text-transform: uppercase;
-    font-size: 150px;
+    font-size: 130px;
     padding: 0px;
-    background-image: url('https://media-cldnry.s-nbcnews.com/image/upload/t_fit-560w,f_auto,q_auto:best/newscms/2020_28/1587661/dogs-age-years-kb-inline-200707.jpg');
-    background-repeat: no-repeat; 
-    background-position-y:  center;
-    background-size: cover;
-    background-clip: text;
-    -webkit-background-clip: text;
 `;
 export const Dogi = styled.img`
     width: 450px;
@@ -69,11 +59,9 @@ export const Dogi = styled.img`
 `;
 
 export const ContainerButton = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 689px;
-    width: 100%;
+    position: absolute;
+    top: 30%;
+    left: 48%;
     background-repeat: no-repeat; 
     background-size: cover;
     transform: rotateX(0);
@@ -81,7 +69,7 @@ export const ContainerButton = styled.div`
 export const Button = styled(Link)`
     display: inline-flex;
     width: 100px;
-    min-width: 270px;
+    min-width: 290px;
     height: 80px;
     background: #141414;
     justify-content: center;
@@ -89,7 +77,6 @@ export const Button = styled(Link)`
     transition: .3s ease all;	
     position: relative;
     overflow: hidden;
-    cursor: pointer;
     text-decoration: none;
     
     &:after {        
@@ -98,14 +85,14 @@ export const Button = styled(Link)`
         color: #fff;
         font-family: 'Ubuntu', sans-serif;
         position: absolute;
-        top: -50px;
-        left: 10%;
+        top: -90px;
+        left: 12%;
         transition: .3s;
     }
     &:hover::after{
 	    top: 10px;
     }
-    `;
+`;
 
 
 export const Span = styled.span`

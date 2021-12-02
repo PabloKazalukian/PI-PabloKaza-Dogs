@@ -9,8 +9,9 @@ export const NaviBar = styled.nav`
     min-height: 65px;
     background: #3da9fc;
     z-index: 20;
-
-    `
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 1px;;
+`;
 export const NavUl = styled.ul`
     box-sizing: border-box;
     display: flex;
@@ -31,17 +32,35 @@ export const SearchBar = styled.form`
     justify-content: center;
     flex-direction: row;
     margin: auto;
+    
 `
 export const InputBar = styled.input`
     display: flex;
     flex-direction: row;
     width: 60%;
     outline: none;
+    background: #d8eefe;
+    outline: none;
+    padding: 5px;
+    border-radius: 7px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border: 0px;
 `
 export const ButtonBar = styled.input`
-    width: 20%;
+    border: 0px;
+    margin-left: 10px ;
     box-sizing: border-box;
-    padding:0px 15px;
+    padding:5px 25px;
+    background:#ef4565;
+    border-radius: 5px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #d8eefe;
+    cursor: pointer;
+    font-size: 1rem;
 `
 export const Lin = styled(Link)`
     box-sizing: border-box;
@@ -55,4 +74,15 @@ export const Lin = styled(Link)`
     text-align: center;
     font-weight:700;
     border-radius:3px;
+    letter-spacing: 1px;
+
+`
+export const Lupa = styled.div`
+    background:transparent;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:40%;
+    left: 68%;
 `

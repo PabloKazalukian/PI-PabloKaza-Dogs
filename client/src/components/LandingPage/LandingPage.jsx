@@ -8,13 +8,12 @@ export default function LandingPage(){
 
     return(
         <Container>
-            <Text>Weltome TO </Text>
-            <Texto>DOGGI </Texto>
+            <Text>Weltome TO DOGGI </Text>
 
             <ContainerButton>
                 
-                <Button to={'/Api'} ><Span>Hola!</Span></Button>
-                <Dogi src={dogi} />
+                <Button to={'/Api'} ><Span>Bienvenido!</Span></Button>
+                {/* <Dogi src={dogi} /> */}
             </ContainerButton>
             
         </Container>

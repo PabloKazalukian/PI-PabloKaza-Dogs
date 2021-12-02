@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import {LinkDog,Doggi,DogDiv,DogInfo} from './DogCard';
 
+import {LinkDog,Doggi,DogDiv,DogInfo} from './DogCard';
+import {HiSearch} from 'react-icons/fa'
 
 
 function Dog(props){

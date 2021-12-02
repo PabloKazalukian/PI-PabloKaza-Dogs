@@ -4,7 +4,9 @@ import { useDispatch} from "react-redux";
 import { Redirect,useLocation  } from "react-router";
 import {getDog} from '../../redux/actions/index';
 
-import {Lin,NaviBar,SearchBar,NavUl,InputBar,ButtonBar} from './NavegationBar.js'
+import {Lin,NaviBar,SearchBar,NavUl,InputBar,ButtonBar,Lupa} from './NavegationBar.js'
+import {HiSearch} from 'react-icons/hi'
+
 
 export default function NavBar(){
     const dispatch = useDispatch();
@@ -40,7 +42,9 @@ export default function NavBar(){
                                 onChange={handleState}
                                 value={state.dogSearch}
                                 type="search" />
-                            <ButtonBar type="submit" value="buscar perros"/>
+                            <ButtonBar type="submit" value='Search'></ButtonBar>
+                            <Lupa><HiSearch/></Lupa>
+                            
                         </SearchBar>
                         : <p/> 
                     }

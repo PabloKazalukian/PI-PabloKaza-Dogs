@@ -65,7 +65,7 @@ function Dogs(props){
                 <select name='selectFilter' onChange={changeTemp}  >
 
                     <option value='Selecciona una opción'
-                            label={'Selecciona una opción'}/>
+                            label={'select'}/>
                     
                     { temp && temp.map( (temp)=>{
 
@@ -77,14 +77,14 @@ function Dogs(props){
 
                 <p>Ordenamiento Por Peso:</p>
                 <select name='select' onChange={selectionChangeWeigth} >
-                    <option disabled selected>Selecciona una opción</option>
+                    <option disabled selected>select</option>
                     <option value="mayor" label='mayor a menor'></option>
                     <option value="menor" label='menor a mayor'></option>
                 </select>
 
                 <p>Ordenamiento Alfabetico:</p>
                 <select name='select' onChange={selectionChange} >
-                    <option disabled selected>Selecciona una opción</option>
+                    <option disabled selected>select</option>
                     <option value="ascendente" label='Ascendente'></option>
                     <option value="descendente" label='Descendente'></option>
                 </select>

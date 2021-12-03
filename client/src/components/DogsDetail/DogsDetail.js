@@ -24,7 +24,8 @@ export const DogDetail= styled.div`
     border-radius: 15px;
     transition: 1s all;
     box-shadow: 10px 33px 80px -4px rgba(0,0,0,0.28);
-
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 1px;
     `;
 export const DogImg = styled.div`
     width: 60%;

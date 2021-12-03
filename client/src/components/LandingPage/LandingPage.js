@@ -60,8 +60,8 @@ export const Dogi = styled.img`
 
 export const ContainerButton = styled.div`
     position: absolute;
-    top: 30%;
-    left: 48%;
+    top: 75%;
+    left: 15%;
     background-repeat: no-repeat; 
     background-size: cover;
     transform: rotateX(0);

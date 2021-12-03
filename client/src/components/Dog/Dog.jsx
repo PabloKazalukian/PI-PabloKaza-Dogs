@@ -23,10 +23,10 @@ function Dog(props){
                 </DogDiv>
                 <DogInfo>
                     <h4>{props.name}</h4>
-                    <p>Tamaño: {props.height} Cm</p>
-                    <p>Peso: {props.weight} Kg</p>
-                    <p>Temperamento: {props.temperament}</p>
-                    <LinkDog to={`/api/search/${props.id}`}> Ver Mas</LinkDog>
+                    <p>Height: {props.height} Cm</p>
+                    <p>Weight: {props.weight} Kg</p>
+                    <p>Temperaments: {props.temperament}</p>
+                    <LinkDog to={`/api/search/${props.id}`}>See more</LinkDog>
                 </DogInfo>
             </Doggi>
        

@@ -33,7 +33,7 @@ export default function NavBar(){
             <NaviBar>
                 <NavUl>
                     {/* <Lin to={'/'}>Home</Lin> */}
-                    <Lin to={'/Api'}>Perritos </Lin>
+                    <Lin to={'/Api'}>Doggi </Lin>
                     { pathname.toLowerCase() === '/api' ?
                         <SearchBar onSubmit={handleSubmit}>
                             <InputBar 
@@ -48,7 +48,7 @@ export default function NavBar(){
                         </SearchBar>
                         : <p/> 
                     }
-                    <Lin to={'/Api/Form'}>Agregar </Lin>
+                    <Lin to={'/Api/Form'}>Add a Dog</Lin>
 
                 </NavUl>
             </NaviBar>

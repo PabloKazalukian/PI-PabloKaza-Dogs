@@ -2,8 +2,12 @@ import React from 'react';
 import {useEffect, useState} from 'react'
 import { getTemperament} from '../../redux/actions';
 import { useDispatch,useSelector } from 'react-redux';
-import {FormDoggies,Container} from './DogForm';
+import { Link } from 'react-router-dom';
 
+import {FormDoggies,Container,ContainerTemp,CreateDog,CompleteDog
+  ,TempShow,DeleteTemp,TempName} from './DogForm';
+
+import {Lin} from '../NavBar/NavegationBar'
 
 const DogForm = () => {
   const dispatch = useDispatch();
@@ -26,6 +30,7 @@ const DogForm = () => {
   },[])
   const [state, setstate] = useState(initialState);
   const [tempShow, setTempShow] = useState(initialTemp);
+  const [submitComp,setSumbit] = useState(false);
 
 
   const handleState = (e) =>{
@@ -45,41 +50,70 @@ const DogForm = () => {
       .then(r => r.json())
       // .then(json=>{dispatch({type:ADD_DOG, payload: json});})
       .catch(err=>{
-        console.log(err);
+        setSumbit(false);
+        alert(err);
+
       })          
   }
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    console.log(state);
-    addDogs(state)
+    addDogs(state);
+    setSumbit(true);
   }
 
-  //debo mostrar el name pero llevar al back el id de los temperament
+  //debo mostrar el name, pero solo llevar al back el id de los temperament
   const selectTemp = (e)=>{
-    console.log(typeof e.target.value)
-    if(!state.temperament.includes(e.target.value)){
+    if('Selecciona una opción'!==e.target.value){
+      console.log(typeof e.target.value);
+      if(!state.temperament.includes(parseInt(e.target.value,10))){
 
-      setstate({
-        ...state,
-        temperament: [...state.temperament,
-           parseInt(e.target.value,10)]
-      });
-
-      let [item] = temp.filter(elem =>{if (elem.id == (e.target.value)){
-        return elem.name;
-      }});
-      setTempShow({
-        ...state,
-        temp: [...tempShow.temp, item.name]
-      })
-    }else{
-      alert('No vale repetir');
+        setstate({
+          ...state,
+          temperament: [...state.temperament,
+            parseInt(e.target.value,10)]
+        });
+        //obtengo el name de temp,por su id, para mostarlo en pantalla
+        let [item] = temp.filter(elem =>{if (elem.id == (e.target.value)){
+          return elem.name;
+        }});
+        //estado para el name de temp
+        setTempShow({
+          ...tempShow,
+          temp: [...tempShow.temp, item.name]
+        })
+      }else{
+        // alert('No vale repetir');
+      }
     }
+  }
+    
+  const deleteTemp = (e)=>{
+    e.preventDefault();
+    //obtengo el id de temp, por su name, para eliminarlo
+    let [item] = temp.filter(elem =>{if (elem.name == (e.target.value)){
+      return elem.id;
+    }});
+    setstate({
+      ...state,
+      temperament: state.temperament.filter(e => e !== item.id )
+    });
+    setTempShow({
+      ...tempShow,
+      temp: tempShow.temp.filter(elem => elem !== e.target.value)
+    });
   }
 
   return (
       <Container>
+        {submitComp ?
+        <>
+          <CompleteDog>
+              <h2>form completed, dog has been created!</h2>
+              <Lin to={'/Api'}>return</Lin>
+          </CompleteDog>
+        </>
+        :
         <FormDoggies onSubmit={handleSubmit}>
             <label>Name: </label>
             <input name='name' onChange={handleState} value={state.name}/>
@@ -87,12 +121,12 @@ const DogForm = () => {
             <input type="number" name='height' onChange={handleState} value={state.height}/>
             <label>Weight: </label>
             <input type="number" name='weight' onChange={handleState} value={state.weight}/>
-            <label>Life span: </label>
+            <label>Life expectancy: </label>
             <input type="number" name="life_span" onChange={handleState} value={state.life_span} />
             <label>Images: </label>            
             <input name="images" onChange={handleState} value={state.images} />
-            <label>temperament: </label>
-            <select name='selectTemp' onChange={selectTemp}>
+            <label>Temperament/s: </label>
+            <select name='selectTemp' onClick={selectTemp}>
               <option value='Selecciona una opción'
                   label={'Selecciona una opción'}/>
                     
@@ -105,14 +139,23 @@ const DogForm = () => {
                         
                     })}
 
-              </select>
-              <div> 
-                {tempShow.temp?.map(e =><p key ={e}>{e}</p>)}
-              </div>
+            </select>
+            <ContainerTemp> 
+              {tempShow.temp?.map(e =>(
+                <TempShow key ={e}>
+                  <TempName >{e}</TempName>
+                  <DeleteTemp 
+                  onClick={deleteTemp}
+                  value={e}>X</DeleteTemp>
+                </TempShow>
+              ))}
+            </ContainerTemp>
 
-              <button type='submit'>Create</button>
+            <CreateDog type='submit'>Create</CreateDog>
         </FormDoggies>
+      }
       </Container>
+
   );
 };
 

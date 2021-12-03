@@ -60,7 +60,7 @@ export const DogInfo = styled.div`
         color: #222 ;
     }
     & p{        
-        background: #3331;
+        background: #3331;//3331ground: 
         width: 100%;
         margin: 0px;
         color: #000 ;
@@ -85,8 +85,11 @@ export const LinkDog= styled(Link)`
     font-weight:700;
     border-radius: 5px;
     z-index: 20;
-    transition: all .3s;
+    transition: top .3s;
     transition-delay: .6s;
+    &:hover{
+        color: #333;
+    }
     ${Doggi}:hover &{
         top:72%;
     }

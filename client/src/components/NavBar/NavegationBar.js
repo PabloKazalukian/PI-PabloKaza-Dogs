@@ -77,6 +77,9 @@ export const Lin = styled(Link)`
     font-weight:700;
     border-radius:3px;
     letter-spacing: 1px;
+    &:hover{
+        color: #333;
+    }
 
 `
 export const Lupa = styled.div`

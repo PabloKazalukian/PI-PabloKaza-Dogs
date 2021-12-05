@@ -22,7 +22,13 @@ const  agregandoTemps = async (temperament)=>{
 
 router.post('/', async(req,res,next)=>{
     try{
-        const {name,height,weight,life_span,temperament,images} = req.body;
+        const {name,heightMin,heightMax,weightMin,weightMax,life_span,temperament,images} = req.body;
+        let height,weight;
+        if(heightMin<heightMax){
+             height = heightMin + ' - ' + heightMax;
+        }else  height = heightMax + ' - ' + heightMin;
+        if(weightMin<weightMax) weight = weightMin + ' - ' + weightMax; 
+        else  weight = weightMax + ' - ' + weightMin;
         const newPerrito = await Dog.create({name,height,weight,life_span,images});
         await newPerrito.addTemperament(temperament);
         res.send(newPerrito);

@@ -63,6 +63,9 @@ export const ButtonBar = styled.input`
     color: #d8eefe;
     cursor: pointer;
     font-size: 1rem;
+    &:hover{
+        color:#333
+    }
 `
 export const Lin = styled(Link)`
     box-sizing: border-box;
@@ -72,7 +75,7 @@ export const Lin = styled(Link)`
     width: 10%;
     height: 50px;
     color: #fffffe;
-    padding: 12px 0px;
+    padding: 14px 0px;
     text-align: center;
     font-weight:700;
     border-radius:3px;
@@ -89,5 +92,5 @@ export const Lupa = styled.div`
     align-items: center;
     position: absolute;
     top:40%;
-    left: 68%;
+    left: 67%;
 `

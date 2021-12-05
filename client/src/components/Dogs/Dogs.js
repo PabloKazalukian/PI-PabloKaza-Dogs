@@ -48,23 +48,5 @@ export const OrderDog= styled.div`
         cursor: pointer;
     }
 
+`;
 
-`;
-export const PaginationDog= styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    height: 2rem;
-    width: 100%;
-`;
-export const ButtonDog= styled.button`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 1.7rem;
-    width: auto;
-    background: #d8eefe;
-`;

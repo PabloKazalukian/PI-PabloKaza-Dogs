@@ -4,7 +4,8 @@ import { useDispatch,useSelector } from "react-redux";
 import {getDogs,sort,getTemperament,filterTemp,sortWeigth} from '../../redux/actions/index';
 import Pagination from "../Pagination/Pagination.jsx";
 import Dog from "../Dog/Dog";
-import {OrderDog,Doggies,PaginationDog,ButtonDog} from './Dogs'
+import {OrderDog,Doggies} from './Dogs'
+import Loading from "../Loading/Loading.jsx";
 
 
 function Dogs(props){
@@ -19,14 +20,13 @@ function Dogs(props){
     const temp = useSelector(state => state.temp);
 
     const dispatch = useDispatch();
-    useEffect(()=>{
+    useEffect(()=>{        
         setLoading(false);
         dispatch(getDogs());
         dispatch(getTemperament());
         dispatch(sort('ascendente'));
         setPage(dog1);
         setLoading(true);
-
     },[])
     useEffect(()=>{
         setLoading(false);        
@@ -72,8 +72,7 @@ function Dogs(props){
                         return <option key={temp.id} value={temp.name} label={temp.name}/>
                         
                     })}
-                </select>
-                
+                </select>                
 
                 <p>Ordenamiento Por Peso:</p>
                 <select name='select' onChange={selectionChangeWeigth} >
@@ -96,8 +95,10 @@ function Dogs(props){
                 paginate={paginate}
             />
             <Doggies>
-            {   
-                currentPost?.map((dog)=>{
+            {
+                !loading?
+                <Loading/>
+                :currentPost?.map((dog)=>{
                     return <Dog name={dog.name} 
                     height={dog.height}
                     weight={dog.weight}

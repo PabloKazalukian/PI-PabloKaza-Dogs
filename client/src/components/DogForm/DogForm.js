@@ -26,7 +26,7 @@ export const CompleteDog = styled.div`
 export const FormDoggies= styled.form`
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     width: 600px;
@@ -34,7 +34,11 @@ export const FormDoggies= styled.form`
     padding: 50px;
     background: #d8eefe;
 `;
-
+export const Title= styled.h1`
+    position: absolute;
+    top:15%;
+    left: 41%;
+`;
 export const CreateDog = styled.button`
     border: 0px;
     display: block;
@@ -74,10 +78,28 @@ export const TempShow = styled.div`
     border-radius: 5px;
     border: 2px solid #ef4565;
     margin: 4px;
-
     background: #90b4ce97;
 
 `;
+
+export const  Error = styled.label`
+    color: #ef4565;
+`;
+
+export const Agregado = styled.p`
+    color:#ccc;
+    display: inline;
+`
+
+export const ContainInput = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 20px;
+    width: 60%;
+    min-height: 65px;
+`;
+
 export const TempName = styled.p`
     box-sizing: border-box;
     display: inline-flex;
@@ -88,7 +110,7 @@ export const TempName = styled.p`
     text-align: center;
     padding: 0px 4px;
     margin: 0px 2px;
-    cursor: default
+    cursor: default;
 `;
 
 export const DeleteTemp = styled.button`

@@ -4,8 +4,8 @@ import { getTemperament} from '../../redux/actions';
 import { useDispatch,useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import {FormDoggies,Container,ContainerTemp,CreateDog,CompleteDog
-  ,TempShow,DeleteTemp,TempName} from './DogForm';
+import {FormDoggies,Container,ContainerTemp,CreateDog,CompleteDog,Agregado,
+    Title,ContainInput,TempShow,DeleteTemp,TempName,Error} from './DogForm';
 
 import {Lin} from '../NavBar/NavegationBar'
 
@@ -17,28 +17,60 @@ const DogForm = () => {
     temp: []
   }
   const initialState ={
-      name: "",
-      height: "",
-      weight: "",
-      life_span:"",
-      images:"",
-      temperament:[],
+    name: "",
+    heightMin: "",
+    heightMax: "",
+    weightMin: "",
+    weightMax:"",
+    life_span:"",
+    images:"",
+    temperament:[],
   }
 
   useEffect(()=>{
     dispatch(getTemperament());
   },[])
+  
+
   const [state, setstate] = useState(initialState);
   const [tempShow, setTempShow] = useState(initialTemp);
   const [submitComp,setSumbit] = useState(false);
-
+  const [error, setError] = useState({
+    name:'',
+    temperament:'',
+  });
+  
+  const validation = ()=>{
+    let boolean= true;
+    if(state.name.length > 40 || state.name.length === 0){
+      error.name='the name is invalid';
+      console.log(error);
+      boolean= false;
+    } else{
+      error.name='';
+      console.log(error);
+    }
+    if(state.temperament.length < 1){
+      setError({
+        ...error,
+        temperament:'temperaments are empty'
+      })
+      boolean= false;
+    }else {
+      setError({
+        ...error,
+        temperament:''
+      })
+    }
+    return boolean;
+  }
 
   const handleState = (e) =>{
     setstate({
       ...state,
-      [e.target.name]: e.target.value
+        [e.target.name]: e.target.value
       });
-    }
+  }
 
   const addDogs = (dog) =>{
     return fetch(`http://localhost:3001/api/dog`, {
@@ -46,26 +78,26 @@ const DogForm = () => {
       body: JSON.stringify(dog),
       headers:{
         'Content-Type': 'application/json'},
-      })
-      .then(r => r.json())
-      // .then(json=>{dispatch({type:ADD_DOG, payload: json});})
-      .catch(err=>{
-        setSumbit(false);
-        alert(err);
-
-      })          
+    })
+    .then(r => r.json())
+    // .then(json=>{dispatch({type:ADD_DOG, payload: json});})
+    .catch(err=>{
+      setSumbit(false);
+      alert(err);
+    })
   }
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    addDogs(state);
-    setSumbit(true);
+    if(validation()){
+      addDogs(state);
+      setSumbit(true);
+    }
   }
 
   //debo mostrar el name, pero solo llevar al back el id de los temperament
   const selectTemp = (e)=>{
     if('Selecciona una opción'!==e.target.value){
-      console.log(typeof e.target.value);
       if(!state.temperament.includes(parseInt(e.target.value,10))){
 
         setstate({
@@ -104,6 +136,7 @@ const DogForm = () => {
     });
   }
 
+
   return (
       <Container>
         {submitComp ?
@@ -115,17 +148,34 @@ const DogForm = () => {
         </>
         :
         <FormDoggies onSubmit={handleSubmit}>
-            <label>Name: </label>
-            <input name='name' onChange={handleState} value={state.name}/>
-            <label>Height: </label>
-            <input type="number" name='height' onChange={handleState} value={state.height}/>
-            <label>Weight: </label>
-            <input type="number" name='weight' onChange={handleState} value={state.weight}/>
-            <label>Life expectancy: </label>
-            <input type="number" name="life_span" onChange={handleState} value={state.life_span} />
-            <label>Images: </label>            
-            <input name="images" onChange={handleState} value={state.images} />
-            <label>Temperament/s: </label>
+          <Title>Created a Doggi</Title>
+            <ContainInput>
+              <label>Name <Agregado>(max40)</Agregado> </label>
+              <input required name='name' onChange={handleState} value={state.name}/>
+              <Error>{error.name}</Error>
+              
+            </ContainInput>
+            <ContainInput>
+              <label>Height <Agregado>(No matter the order)</Agregado></label>
+              <input required min='1' max='100' type="number" name='heightMin' onChange={handleState} value={state.heightMin}/>
+              <input required min='2' max='100' type="number" name='heightMax' onChange={handleState} value={state.heightMax}/>              
+              
+            </ContainInput>
+            <ContainInput>
+              <label>Weight <Agregado>(No matter the order)</Agregado> </label>
+              <input required min='1' max='100' type="number" name='weightMin' onChange={handleState} value={state.weightMin}/>
+              <input required min='2' max='100' type="number" name='weightMax' onChange={handleState} value={state.weightMax}/>
+
+            </ContainInput>
+            <ContainInput>
+              <label>Life expectancy </label>
+              <input  min='1' max='50' type="number" name="life_span" onChange={handleState} value={state.life_span} />              
+            </ContainInput>
+            <ContainInput>
+              <label>Images  </label>            
+              <input name="images" onChange={handleState} value={state.images} />
+            </ContainInput>
+            <label>Temperament/s </label>
             <select name='selectTemp' onClick={selectTemp}>
               <option value='Selecciona una opción'
                   label={'Selecciona una opción'}/>
@@ -140,6 +190,9 @@ const DogForm = () => {
                     })}
 
             </select>
+            
+            <Error>{error.temperament}</Error>
+              
             <ContainerTemp> 
               {tempShow.temp?.map(e =>(
                 <TempShow key ={e}>

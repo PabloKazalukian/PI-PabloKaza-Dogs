@@ -138,76 +138,75 @@ const DogForm = () => {
 
 
   return (
-      <Container>
-        {submitComp ?
-        <>
-          <CompleteDog>
-              <h2>form completed, dog has been created!</h2>
-              <Lin to={'/Api'}>return</Lin>
-          </CompleteDog>
-        </>
-        :
-        <FormDoggies onSubmit={handleSubmit}>
-          <Title>Created a Doggi</Title>
-            <ContainInput>
-              <label>Name <Agregado>(max40)</Agregado> </label>
-              <input required name='name' onChange={handleState} value={state.name}/>
-              <Error>{error.name}</Error>
-              
-            </ContainInput>
-            <ContainInput>
-              <label>Height <Agregado>(No matter the order)</Agregado></label>
-              <input required min='1' max='100' type="number" name='heightMin' onChange={handleState} value={state.heightMin}/>
-              <input required min='2' max='100' type="number" name='heightMax' onChange={handleState} value={state.heightMax}/>              
-              
-            </ContainInput>
-            <ContainInput>
-              <label>Weight <Agregado>(No matter the order)</Agregado> </label>
-              <input required min='1' max='100' type="number" name='weightMin' onChange={handleState} value={state.weightMin}/>
-              <input required min='2' max='100' type="number" name='weightMax' onChange={handleState} value={state.weightMax}/>
-
-            </ContainInput>
-            <ContainInput>
-              <label>Life expectancy </label>
-              <input  min='1' max='50' type="number" name="life_span" onChange={handleState} value={state.life_span} />              
-            </ContainInput>
-            <ContainInput>
-              <label>Images  </label>            
-              <input name="images" onChange={handleState} value={state.images} />
-            </ContainInput>
-            <label>Temperament/s </label>
-            <select name='selectTemp' onClick={selectTemp}>
-              <option value='Selecciona una opción'
-                  label={'Selecciona una opción'}/>
-                    
-                    { temp && temp.map( (temp)=>{
-                      
-                      return <option name={temp.name} 
-                      key={temp.id}
-                      value={temp.id} 
-                      label={temp.name}/>
-                        
-                    })}
-
-            </select>
+    <Container>
+      {submitComp ?
+      <>
+        <CompleteDog>
+            <h2>form completed, dog has been created!</h2>
+            <Lin to={'/Api'}>return</Lin>
+        </CompleteDog>
+      </>
+      :
+      <FormDoggies onSubmit={handleSubmit}>
+        <Title>Created a Doggi</Title>
+          <ContainInput>
+            <label>Name </label>
+            <input required placeholder='max. 40' name='name' onChange={handleState} value={state.name}/>
+            <Error>{error.name}</Error>
             
-            <Error>{error.temperament}</Error>
-              
-            <ContainerTemp> 
-              {tempShow.temp?.map(e =>(
-                <TempShow key ={e}>
-                  <TempName >{e}</TempName>
-                  <DeleteTemp 
-                  onClick={deleteTemp}
-                  value={e}>X</DeleteTemp>
-                </TempShow>
-              ))}
-            </ContainerTemp>
+          </ContainInput>
+          <ContainInput>
+            <label>Height </label>
+            <input required placeholder='No matter the order' min='1' max='100' type="number" name='heightMin' onChange={handleState} value={state.heightMin}/>
+            <input required min='2' max='100' type="number" name='heightMax' onChange={handleState} value={state.heightMax}/>              
+            
+          </ContainInput>
+          <ContainInput>
+            <label>Weight <Agregado>(No matter the order)</Agregado> </label>
+            <input required min='1' max='100' type="number" name='weightMin' onChange={handleState} value={state.weightMin}/>
+            <input required min='2' max='100' type="number" name='weightMax' onChange={handleState} value={state.weightMax}/>
 
-            <CreateDog type='submit'>Create</CreateDog>
-        </FormDoggies>
+          </ContainInput>
+          <ContainInput>
+            <label>Life expectancy </label>
+            <input  min='1' max='50' type="number" name="life_span" onChange={handleState} value={state.life_span} />              
+          </ContainInput>
+          <ContainInput>
+            <label>Images  </label>            
+            <input name="images" onChange={handleState} value={state.images} />
+          </ContainInput>
+          <label>Temperament/s </label>
+          <select name='selectTemp' onClick={selectTemp}>
+            <option value='Selecciona una opción'
+              label={'Selecciona una opción'}/>
+                
+                { temp && temp.map( (temp)=>{
+                  
+                  return <option name={temp.name} 
+                  key={temp.id}
+                  value={temp.id} 
+                  label={temp.name}/>
+                    
+                })}
+          </select>
+          
+          <Error>{error.temperament}</Error>
+            
+          <ContainerTemp> 
+            {tempShow.temp?.map(e =>(
+              <TempShow key ={e}>
+                <TempName >{e}</TempName>
+                <DeleteTemp 
+                onClick={deleteTemp}
+                value={e}>X</DeleteTemp>
+              </TempShow>
+            ))}
+          </ContainerTemp>
+
+          <CreateDog type='submit'>Create</CreateDog>
+      </FormDoggies>
       }
-      </Container>
+    </Container>
 
   );
 };

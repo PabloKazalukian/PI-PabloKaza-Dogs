@@ -26,9 +26,9 @@ describe('Dog ', () => {
     beforeEach(() => Dog.sync({ force: true })
       .then(() => Dog.create(dog)));
     describe(' /dogs',()=>{
-      it('should get 200', () =>
-        agent.get('/api/dogs').expect(200)
-      )
+      it('should get 200', () =>{
+        return agent.get('/api/dogs').expect(200)
+      })
       it('all the dogs should be',()=>{
         return agent.get('/api/dogs').expect(e => expect(e.body.length>1).equal(true))
       })
@@ -62,28 +62,27 @@ describe('Dog ', () => {
     })
   });
   
-});
+}).timeout(15000);
 
 
 describe('GET Temperament',()=>{
-  beforeEach(() => Dog.sync({ force: true })
-  .then(() => Dog.create(dog2))
-  .then(()=> Temperament.create()));
+  beforeEach(() => Temperament.sync({ force: true })
+  .then(()=> Temperament.create({name:1})));
   it('temperament is empty',()=>{
     return expect(Temperament.length).equal(0)
-  })
+  }).timeout(15000)
   describe('/temperament',()=>{
     it('should get 200',()=>{
       return agent
       .get('/api/temperament')
       .expect(200)
-    })
+    }).timeout(15000)
     it('add temperaments',()=>{
       expect(Temperament.length).equal(0)
       return agent
       .get('/api/temperament')
       .expect(e => expect(e.body.length>0).equal(true))
-    })
+    }).timeout(15000)
   })
 })
 
@@ -132,7 +131,7 @@ describe('POST dog',()=>{
       .get('/api/dog')
       .then((e)=> expect(e.body[0]).contain(dog));
     })
-  })
+  }).timeout(15000)
 
    it('add Dog2',()=>{
     return agent
@@ -156,4 +155,4 @@ describe('POST dog',()=>{
       .send(dogmessy)
       .then(e => expect(e.body.weight).equal('5 - 15'))
    })
-})
+}).timeout(15000)

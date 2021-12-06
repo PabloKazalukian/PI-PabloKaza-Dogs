@@ -5,7 +5,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import {FormDoggies,Container,ContainerTemp,CreateDog,CompleteDog,Agregado,
-    Title,ContainInput,TempShow,DeleteTemp,TempName,Error} from './DogForm';
+  InputNum,Title,ContainInput,TempShow,DeleteTemp,TempName,Error} from './DogForm';
 
 import {Lin} from '../NavBar/NavegationBar'
 
@@ -42,7 +42,7 @@ const DogForm = () => {
   
   const validation = ()=>{
     let boolean= true;
-    if(state.name.length > 40 || state.name.length === 0){
+    if(state.name.length > 40 || state.name.length === 0 || state.name.length<5){
       error.name='the name is invalid';
       console.log(error);
       boolean= false;
@@ -151,25 +151,25 @@ const DogForm = () => {
         <Title>Created a Doggi</Title>
           <ContainInput>
             <label>Name </label>
-            <input required placeholder='max. 40' name='name' onChange={handleState} value={state.name}/>
+            <input required placeholder='5-40 characters' name='name' onChange={handleState} value={state.name}/>
             <Error>{error.name}</Error>
             
           </ContainInput>
           <ContainInput>
-            <label>Height </label>
-            <input required placeholder='No matter the order' min='1' max='100' type="number" name='heightMin' onChange={handleState} value={state.heightMin}/>
-            <input required min='2' max='100' type="number" name='heightMax' onChange={handleState} value={state.heightMax}/>              
+            <label>Height <Agregado>(No matter the order)</Agregado> </label>
+            <InputNum required  min='1' max='100' type="number" name='heightMin' onChange={handleState} value={state.heightMin}/>
+            <InputNum required min='2' max='100' type="number" name='heightMax' onChange={handleState} value={state.heightMax}/>              
             
           </ContainInput>
           <ContainInput>
             <label>Weight <Agregado>(No matter the order)</Agregado> </label>
-            <input required min='1' max='100' type="number" name='weightMin' onChange={handleState} value={state.weightMin}/>
-            <input required min='2' max='100' type="number" name='weightMax' onChange={handleState} value={state.weightMax}/>
+            <InputNum required min='1' max='100' type="number" name='weightMin' onChange={handleState} value={state.weightMin}/>
+            <InputNum required min='2' max='100' type="number" name='weightMax' onChange={handleState} value={state.weightMax}/>
 
           </ContainInput>
           <ContainInput>
-            <label>Life expectancy </label>
-            <input  min='1' max='50' type="number" name="life_span" onChange={handleState} value={state.life_span} />              
+            <label>Life expectancy <Agregado>Max 50</Agregado> </label>
+            <InputNum  min='1' max='50' type="number" name="life_span" onChange={handleState} value={state.life_span} />              
           </ContainInput>
           <ContainInput>
             <label>Images  </label>            

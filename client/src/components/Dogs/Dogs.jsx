@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
-import {getDogs,sort,getTemperament,filterTemp,sortWeigth} from '../../redux/actions/index';
 import Pagination from "../Pagination/Pagination.jsx";
 import Dog from "../Dog/Dog";
-import {OrderDog,Doggies} from './Dogs'
+import {getDogs,sort,getTemperament,filterTemp,sortWeigth} from '../../redux/actions/index';
 import Loading from "../Loading/Loading.jsx";
 
+import {Doggies,OrderDog,TitleError,ContainError,Error} from './Dogs'
 
 function Dogs(props){
 
@@ -18,35 +18,43 @@ function Dogs(props){
 
     const dog1 = useSelector(state => state.dog);
     const temp = useSelector(state => state.temp);
+    const err = useSelector(state => state.error);
+
 
     const dispatch = useDispatch();
-    useEffect(()=>{        
-        setLoading(false);
-        dispatch(getDogs());
-        dispatch(getTemperament());
-        dispatch(sort('ascendente'));
-        setPage(dog1);
-        setLoading(true);
+    useEffect(()=>{
+        if(!err){    
+            setLoading(false);
+            dispatch(getDogs());
+            dispatch(getTemperament());
+            dispatch(sort('ascendente'));
+            setPage(dog1);
+            setLoading(true);
+        }
     },[])
     useEffect(()=>{
-        setLoading(false);        
-        setPage(dog1);
-        setCurrentPage(1);
-        setLoading(true);
-
+        if(!err){
+            setLoading(false);        
+            setPage(dog1);
+            setCurrentPage(1);
+            setLoading(true);
+        }
+            
     },[dog1])
     function selectionChange(e){
-        dispatch(sort(e.target.value));
+        if(e.target.value==='none') {dispatch(getDogs());}
+        else {dispatch(sort(e.target.value))};
     }
     function changeTemp(e){
-        if(e.target.value === 'Selecciona una opción') {
+        if(e.target.value === 'all') {
             dispatch(getDogs());
         }
         dispatch(filterTemp(e.target.value));
     }
 
     function selectionChangeWeigth(e){
-        dispatch(sortWeigth(e.target.value));
+        if(e.target.value==='none'){dispatch(getDogs())}
+        else {dispatch(sortWeigth(e.target.value))};
     }
 
     //Get current post ,Pagination
@@ -56,16 +64,17 @@ function Dogs(props){
 
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
-  
+    function restart  (){
+        dispatch(getDogs());
+    }
     return (
         <div>
-             
+            
             <OrderDog > 
-                <p>Filtrar Por:</p>
+                <p>Filter By:</p>
                 <select name='selectFilter' onChange={changeTemp}  >
-
-                    <option value='Selecciona una opción'
-                            label={'select'}/>
+                    <option disabled selected>select</option>
+                    <option value='all'label={'all Temperaments'}/>
                     
                     { temp && temp.map( (temp)=>{
 
@@ -74,28 +83,32 @@ function Dogs(props){
                     })}
                 </select>                
 
-                <p>Ordenamiento Por Peso:</p>
+                <p>Sort by weight:</p>
                 <select name='select' onChange={selectionChangeWeigth} >
                     <option disabled selected>select</option>
-                    <option value="mayor" label='mayor a menor'></option>
-                    <option value="menor" label='menor a mayor'></option>
+                    <option value='none'label={'none'}/>
+                    <option value="mayor" label='higher to lower'></option>
+                    <option value="menor" label='lower to higher'></option>
                 </select>
 
-                <p>Ordenamiento Alfabetico:</p>
+                <p>Sort by alphabet:</p>
                 <select name='select' onChange={selectionChange} >
                     <option disabled selected>select</option>
-                    <option value="ascendente" label='Ascendente'></option>
-                    <option value="descendente" label='Descendente'></option>
+                    <option value='none'label={'none'}/>
+                    <option value="ascendente" label='ascendant'></option>
+                    <option value="descendente" label='descendent'></option>
                 </select>
                 
             </OrderDog>
+            { !err ?
+            <>
             <Pagination
                 cantPage={cantPage}
                 totalPage={page.length}
                 paginate={paginate}
             />
             <Doggies>
-            {
+                {
                 !loading?
                 <Loading/>
                 :currentPost?.map((dog)=>{
@@ -106,16 +119,25 @@ function Dogs(props){
                     images={dog.images}
                     key={dog.id} 
                     id={dog.id} />
-                })
-            }
+                })}
             </Doggies>
+
             <Pagination
                 cantPage={cantPage}
                 totalPage={page.length}
                 paginate={paginate}
-            />
-            
-            
+                />
+                </>
+                :  
+                <ContainError>
+                    <TitleError>Dog Not Found</TitleError> 
+                    <img src='https://i0.wp.com/noticieros.televisa.com/wp-content/uploads/2021/03/cheems-1.jpg?w=1080&ssl=1'/>
+                    <Error onClick={restart} >Return</Error>
+                </ContainError> 
+            }
+                
+        
+        
         </div>
     )
 

@@ -40,17 +40,3 @@ xdescribe('Dog model', () => {
   });
 });
 
-xdescribe('Temperament',()=>{
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-  }));
-  describe('Validators', (done) => {
-    beforeEach(() => Temperament.sync({ force: true }));
-    it('should throw an error if name is null', (done) => {
-      Temperament.create({})
-        .then(() => done(new Error('should throw an error if name is null')))
-        .catch(() => done());
-    });      
-  });
-})

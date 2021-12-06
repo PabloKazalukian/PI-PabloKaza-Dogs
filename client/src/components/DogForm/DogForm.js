@@ -33,15 +33,18 @@ export const FormDoggies= styled.form`
     min-height: 600px;
     padding: 50px;
     background: #d8eefe;
+    position: relative;
 `;
 export const Title= styled.h1`
     position: absolute;
-    top:15%;
-    left: 41%;
+    top:-1%;
+    left: 25%;
 `;
 export const CreateDog = styled.button`
     border: 0px;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 21%;
     box-sizing: border-box;
     padding:5px 25px;
@@ -60,8 +63,7 @@ export const ContainerTemp = styled.form`
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    width: 80%;
-    margin: auto;
+    width: 100%;
     background: #3331;//3331
     min-height: 80px ;
     overflow: hidden;
@@ -98,6 +100,10 @@ export const ContainInput = styled.div`
     margin-top: 20px;
     width: 60%;
     min-height: 65px;
+`;
+
+export const InputNum = styled.input`
+    width: 75px;
 `;
 
 export const TempName = styled.p`

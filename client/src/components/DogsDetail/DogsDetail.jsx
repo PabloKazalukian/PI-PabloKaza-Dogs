@@ -35,7 +35,7 @@ function Dog(){
     if(state?.dog?.images){
         imggs = state.dog.images;
     }
-    let desc = 'desconocido';
+    let desc = 'unknown';
     return (
         <div>
 

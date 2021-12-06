@@ -12,7 +12,7 @@ export default function LandingPage(){
 
             <ContainerButton>
                 
-                <Button to={'/Api'} ><Span>Bienvenido!</Span></Button>
+                <Button to={'/Api'} ><Span>Welcome!</Span></Button>
                 {/* <Dogi src={dogi} /> */}
             </ContainerButton>
             

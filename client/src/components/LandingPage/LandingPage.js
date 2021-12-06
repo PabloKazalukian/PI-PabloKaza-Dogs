@@ -80,13 +80,13 @@ export const Button = styled(Link)`
     text-decoration: none;
     
     &:after {        
-        content: 'Welcome!';
+        content: 'To Doggi';
         font-size: 50px;
         color: #fff;
         font-family: 'Ubuntu', sans-serif;
         position: absolute;
         top: -90px;
-        left: 12%;
+        left: 17%;
         transition: .3s;
     }
     &:hover::after{

@@ -14,12 +14,8 @@ router.get('/',async (req,res,next)=>{
         if(name){
             const URL2 =`https://api.thedogapi.com/v1/breeds/search?q=${name}`;
             dogsPromiseApi = await axios.get(URL2);
-            dogsPromiseDb = await Dog.findAll({
-                include: Temperament,
-                where:{
-                    name:name
-                },
-            });
+            dogsPromiseDb = await Dog.findAll({include: Temperament});
+            dogsPromiseDb = dogsPromiseDb.filter(dog => dog.dataValues.name.toLowerCase().includes(name.toLowerCase()))
         }else{
             dogsPromiseApi = await axios.get(URL1);
             dogsPromiseDb = await Dog.findAll({

@@ -3,6 +3,8 @@ let initalState={
     dogs:[],
     dog:[],
     temp:[],
+    error:false
+
 }
 
 export default function rootReducer(state=initalState,action){
@@ -11,10 +13,19 @@ export default function rootReducer(state=initalState,action){
             // if(state.dogs.length<1){//guarda los datos una vez seguridad x ahora.
                 return{...state,
                         dogs: action.payload,
-                        dog: action.payload }
+                        dog: action.payload,
+                        error:false }
             // }
         case GET_DOG:
-            return{...state, dog: action.payload}
+            if(action.payload.length===0){
+
+                return{...state,
+                    error: true ,
+                    dog: action.payload}
+            }else{
+                return{...state, dog: action.payload}
+                
+            }
 
         case ADD_DOG:
             return{...state, dog:  action.payload}

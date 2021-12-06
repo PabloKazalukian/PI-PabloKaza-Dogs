@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch} from "react-redux";
 import { Redirect,useLocation  } from "react-router";
-import {getDog} from '../../redux/actions/index';
+import {getDog,getDogs} from '../../redux/actions/index';
 
 import {Lin,NaviBar,SearchBar,NavUl,InputBar,ButtonBar,Lupa} from './NavegationBar.js'
 import {HiSearch} from 'react-icons/hi'
@@ -27,13 +27,16 @@ export default function NavBar(){
         e.preventDefault(); 
         dispatch(getDog(state));
     }
+    function restart  (){
+        dispatch(getDogs());
+    }
 
     return (
         <header className="navBar">
             <NaviBar>
                 <NavUl>
                     {/* <Lin to={'/'}>Home</Lin> */}
-                    <Lin to={'/Api'}>Doggi </Lin>
+                    <Lin onClick={restart} to={'/Api'}>Doggi </Lin>
                     { pathname.toLowerCase() === '/api' ?
                         <SearchBar onSubmit={handleSubmit}>
                             <InputBar 

@@ -2,7 +2,6 @@ import React from 'react';
 import {useEffect, useState} from 'react'
 import { getTemperament} from '../../redux/actions';
 import { useDispatch,useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import {FormDoggies,Container,ContainerTemp,CreateDog,CompleteDog,Agregado,
   InputNum,Title,ContainInput,TempShow,DeleteTemp,TempName,Error} from './DogForm';
@@ -48,7 +47,6 @@ const DogForm = () => {
       boolean= false;
     } else{
       error.name='';
-      console.log(error);
     }
     if(state.temperament.length < 1){
       setError({
@@ -80,7 +78,6 @@ const DogForm = () => {
         'Content-Type': 'application/json'},
     })
     .then(r => r.json())
-    // .then(json=>{dispatch({type:ADD_DOG, payload: json});})
     .catch(err=>{
       setSumbit(false);
       alert(err);
@@ -157,8 +154,8 @@ const DogForm = () => {
           </ContainInput>
           <ContainInput>
             <label>Height <Agregado>(No matter the order)</Agregado> </label>
-            <InputNum required  min='1' max='100' type="number" name='heightMin' onChange={handleState} value={state.heightMin}/>
-            <InputNum required min='2' max='100' type="number" name='heightMax' onChange={handleState} value={state.heightMax}/>              
+            <InputNum required min='1' max='100' type="number" name='heightMin' onChange={handleState} value={state.heightMin}/>
+            <InputNum required min='1' max='100' type="number" name='heightMax' onChange={handleState} value={state.heightMax}/>              
             
           </ContainInput>
           <ContainInput>
@@ -178,7 +175,7 @@ const DogForm = () => {
           <label>Temperament/s </label>
           <select name='selectTemp' onClick={selectTemp}>
             <option value='Selecciona una opción'
-              label={'Selecciona una opción'}/>
+              label={'select'}/>
                 
                 { temp && temp.map( (temp)=>{
                   

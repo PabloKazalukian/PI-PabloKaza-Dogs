@@ -1,4 +1,5 @@
-import {ADD_DOG,GET_DOGS,GET_DOG,SORT,GET_TEMP,FILTER_TEMP,SORT_WEIGHT} from '../actions/index'
+import {GET_DOGS,GET_DOG,SORT,GET_TEMP,FILTER_TEMP,SORT_WEIGHT,SORT_HEIGHT} from '../actions/index';
+
 let initalState={
     dogs:[],
     dog:[],
@@ -9,26 +10,22 @@ let initalState={
 
 export default function rootReducer(state=initalState,action){
     switch(action.type){
-        case GET_DOGS:
-            // if(state.dogs.length<1){//guarda los datos una vez seguridad x ahora.
-                return{...state,
-                        dogs: action.payload,
-                        dog: action.payload,
-                        error:false }
-            // }
+        case GET_DOGS:            
+            return{...state,
+                dogs: action.payload,
+                dog: action.payload,
+                error:false }
+            
         case GET_DOG:
             if(action.payload.length===0){
-
                 return{...state,
                     error: true ,
                     dog: action.payload}
             }else{
-                return{...state, dog: action.payload}
-                
-            }
-
-        case ADD_DOG:
-            return{...state, dog:  action.payload}
+                return{...state, 
+                    error:false
+                    ,dog: action.payload}           
+            }        
         case GET_TEMP:
             return {...state, temp: action.payload}
         case SORT: 
@@ -58,14 +55,12 @@ export default function rootReducer(state=initalState,action){
         case SORT_WEIGHT:
             //(o)n^2
             let orderDog = [...state.dog];
-            // orderDog = orderDog.forEach((dog)=>{
-            //     dog.weight = dog.weight?.split(' - ');
-            // })
             let positionA,positionB;
             orderDog = orderDog.sort((a,b)=>{
                 a =a.weight?.split(' - ');
                 b = b.weight?.split(' - ');
-                if(action.payload === 'mayor'){ // usa el ultimo elemento si es mayor
+                // usa el ultimo elemento si es mayor
+                if(action.payload === 'mayor'){ 
                     positionA= a.length-1;
                     positionB= b.length-1;
                 } else { // usa el primer elemento si es menor
@@ -83,6 +78,32 @@ export default function rootReducer(state=initalState,action){
             })
 
             return {...state, dog: orderDog }
+        case SORT_HEIGHT:
+            //(o)n^2
+            let ordeDog = [...state.dog];
+            let position1,position2;
+            ordeDog = ordeDog.sort((a,b)=>{
+                a =a.height?.split(' - ');
+                b = b.height?.split(' - ');
+                // usa el ultimo elemento si es mayor
+                if(action.payload === 'mayor'){ 
+                    position1= a.length-1;
+                    position2= b.length-1;
+                } else { // usa el primer elemento si es menor
+                    position1= 0;
+                    position2= 0;
+                }
+                if (parseInt(a[positionA],10) < parseInt(b[positionB],10) ) {
+                    return action.payload === 'mayor'? 1 : -1;
+                }
+                if (parseInt(a[positionA],10) > parseInt(b[positionB],10) ) {
+                    return action.payload === 'mayor'? -1 : 1;
+                }
+                return a[1]?b[1]?  (a[1]<b[1])?-1:1 :1 :-1;
+                //pregunta si existe uno u otro, luego compara segunda posicion si existen.
+            })
+
+            return {...state, dog: ordeDog }
         default:
              return state;
     }

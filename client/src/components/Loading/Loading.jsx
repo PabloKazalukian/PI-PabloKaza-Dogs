@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from 'styled-components';
 
 
@@ -16,7 +16,8 @@ function Loading (){
     return (
         <Load>
             <h2>Loading</h2>
-            <img src='https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif'/>
+            <img src='https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif'
+            alt='loading'/>
         </Load>
     )
 

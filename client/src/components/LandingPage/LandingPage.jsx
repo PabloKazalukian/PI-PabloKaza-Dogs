@@ -1,7 +1,6 @@
 import React from "react";
-import dogi from './dogi.png'
 
-import {ContainerButton,Button,Span,Dogi,Container,Text,Texto} from './LandingPage.js'
+import {ContainerButton,Button,Span,Container,Text} from './LandingPage.js'
 
 
 export default function LandingPage(){

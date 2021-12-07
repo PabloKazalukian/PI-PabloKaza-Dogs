@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {HiSearch} from 'react-icons/hi';
 
 
 export const NaviBar = styled.nav`

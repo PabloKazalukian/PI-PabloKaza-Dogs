@@ -64,6 +64,7 @@ function Dogs(props){
 
     // Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
+    
     function restart  (){
         dispatch(getDogs());
     }

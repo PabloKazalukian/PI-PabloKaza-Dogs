@@ -24,9 +24,9 @@ router.post('/', async(req,res,next)=>{
     try{
         const {name,heightMin,heightMax,weightMin,weightMax,life_span,temperament,images} = req.body;
         let height,weight;
-        if(heightMin < heightMax) height = heightMin + ' - ' + heightMax;
-        else  height = heightMax + ' - ' + heightMin
-        if(weightMin < weightMax) {weight = weightMin + ' - ' + weightMax }
+        if(parseInt( heightMin,10) < parseInt( heightMax,10)) {height = heightMin + ' - ' + heightMax}
+        else { height = heightMax + ' - ' + heightMin}
+        if(parseInt(weightMin,10) < parseInt(weightMax,10)) {weight = weightMin + ' - ' + weightMax }
         else  {weight = weightMax + ' - ' + weightMin}
         const newPerrito = await Dog.create({name,height,weight,life_span,images});
         await newPerrito.addTemperament(temperament);

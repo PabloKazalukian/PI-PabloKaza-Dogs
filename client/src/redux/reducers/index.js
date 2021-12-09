@@ -1,4 +1,5 @@
-import {GET_DOGS,GET_DOG,SORT,GET_TEMP,FILTER_TEMP,SORT_WEIGHT,SORT_HEIGHT} from '../actions/index';
+import {GET_DOGS,GET_DOG,SORT,GET_TEMP,GET_DOG_DB
+    ,FILTER_TEMP,SORT_WEIGHT,SORT_HEIGHT} from '../actions/index';
 
 let initalState={
     dogs:[],
@@ -101,6 +102,11 @@ export default function rootReducer(state=initalState,action){
             })
 
             return {...state, dog: ordeDog }
+
+        case GET_DOG_DB:
+            console.log(action.payload);
+            return{ ...state,
+                dog: action.payload}
         default:
              return state;
     }

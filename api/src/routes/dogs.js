@@ -11,7 +11,13 @@ router.get('/',async (req,res,next)=>{
     let name = req.query.name;
     let dogsPromiseApi,dogsPromiseDb,ler;
     try{
+        console.log(name);
         if(name){
+            if(name=== 'DB'){
+                dogsPromiseDb = await Dog.findAll({include: Temperament})
+                console.log(dogsPromiseDb)
+                return res.send(dogsPromiseDb);
+            }
             const URL2 =`https://api.thedogapi.com/v1/breeds/search?q=${name}`;
             dogsPromiseApi =  axios.get(URL2);
             dogsPromiseDb =  Dog.findAll({include: Temperament})
@@ -63,6 +69,8 @@ router.get('/',async (req,res,next)=>{
         next(err);
     }
 });
+
+
 
 
 router.get('/:idRaza',async (req,res,next)=>{

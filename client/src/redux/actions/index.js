@@ -6,6 +6,8 @@ export const GET_TEMP = 'GET_TEMP';
 export const FILTER_TEMP = 'FILTER_TEMP';
 export const SORT_WEIGHT = 'SORT_WEIGHT';
 export const SORT_HEIGHT = 'SORT_HEIGHT';
+export const GET_DOG_DB = 'GET_DOG_DB';
+
 
 
 
@@ -17,7 +19,7 @@ export const getDogs = () =>{
         return fetch(`http://localhost:3001/api/dogs`)
         .then(r => r.json())
         .then(json=>{
-            dispatch({type:GET_DOGS, payload: json});
+            dispatch({type:GET_DOG_DB, payload: json});
         })
         .catch(err=>{
             console.log(err);
@@ -104,4 +106,18 @@ export const filterTemp = (temp) => {
         payload: temp,
     }
 
+}
+
+export const getDb = (search)=>{
+
+    return function(dispatch){
+        return fetch(`http://localhost:3001/api/dogs?name=${search}`)
+        .then(r => r.json())
+        .then(json=>{
+            dispatch({type:GET_DOG_DB, payload: json});
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
 }

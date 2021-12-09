@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import Pagination from "../Pagination/Pagination.jsx";
 import Dog from "../Dog/Dog";
-import {getDogs,sort,getTemperament,filterTemp,sortHeigth,sortWeigth} from '../../redux/actions/index';
+import {getDogs,getDb,sort,getTemperament,
+    filterTemp,sortHeigth,sortWeigth} from '../../redux/actions/index';
 import Loading from "../Loading/Loading.jsx";
 
 import {Doggies,OrderDog,TitleError,ContainError,Error} from './Dogs'
@@ -62,6 +63,13 @@ function Dogs(props){
         else {dispatch(sortWeigth(e.target.value))};
     }
 
+
+    function filterByapiDb(e){
+        if(e.target.value==='none'){}
+        else{
+            dispatch(getDb('DB'))
+        }
+    }
     //1 * 8 , 8 - 8 , slice (0 , 8) case 1
     //2 * 8 , 16 - 8 , slice (8 , 16) case 2
     const indexOfLastPage = currentPage * cantPage;
@@ -88,8 +96,12 @@ function Dogs(props){
                         return <option key={temp.id} value={temp.name} label={temp.name}/>
                         
                     })}
-                </select>                
-
+                </select>
+                <select onChange={filterByapiDb}>
+                    <option disabled selected>select</option>
+                    <option value='none'label={'none'}/>
+                    <option value="DB" label='Db'></option>
+                </select>
                 <p>Sort by height:</p>
                 <select name='select' onChange={selectionChangeHeigth} >
                     <option disabled selected>select</option>
@@ -150,9 +162,7 @@ function Dogs(props){
                     <Error onClick={restart} >Return</Error>
                 </ContainError> 
             }
-                
-        
-        
+
         </div>
     )
 

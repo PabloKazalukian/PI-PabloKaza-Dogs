@@ -37,6 +37,9 @@ const DogForm = () => {
   const [error, setError] = useState({
     name:'',
     temperament:'',
+    life_span:'',
+    height:'',
+    weigth:'',
   });
   
   const validation = ()=>{
@@ -67,6 +70,26 @@ const DogForm = () => {
           temperament:''
         })
       }
+      if(state.heightMin <=0 || state.heightMax >100){
+        setError({
+          ...error,
+          height:'heigh no correct'
+        })
+      }
+      if(state.weightMin <=0 || state.weightMax >100){
+        setError({
+          ...error,
+          weight:'weight no correct'
+        })
+      }
+      if(state.life_span <=0 || state.life_span >50){
+        setError({
+          ...error,
+          life_span:'life span no correct'
+        })
+      }
+
+
     }
     return boolean;
   }
@@ -162,19 +185,23 @@ const DogForm = () => {
           </ContainInput>
           <ContainInput>
             <label>Height <Agregado>(No matter the order)</Agregado> </label>
-            <InputNum required min='1' max='100' type="number" name='heightMin' onChange={handleState} value={state.heightMin}/>
-            <InputNum required min='1' max='100' type="number" name='heightMax' onChange={handleState} value={state.heightMax}/>              
+            <InputNum required  name='heightMin' onChange={handleState} value={state.heightMin}/>
+            <InputNum required  name='heightMax' onChange={handleState} value={state.heightMax}/>              
+            <Error>{error.height}</Error>
             
           </ContainInput>
           <ContainInput>
             <label>Weight <Agregado>(No matter the order)</Agregado> </label>
-            <InputNum required min='1' max='100' type="number" name='weightMin' onChange={handleState} value={state.weightMin}/>
-            <InputNum required min='2' max='100' type="number" name='weightMax' onChange={handleState} value={state.weightMax}/>
+            <InputNum required  type="number" name='weightMin' onChange={handleState} value={state.weightMin}/>
+            <InputNum required  type="number" name='weightMax' onChange={handleState} value={state.weightMax}/>
+            <Error>{error.weigth}</Error>
 
           </ContainInput>
           <ContainInput>
             <label>Life expectancy <Agregado>Max 50</Agregado> </label>
-            <InputNum  min='1' max='50' type="number" name="life_span" onChange={handleState} value={state.life_span} />              
+            <InputNum   type="number" name="life_span" onChange={handleState} value={state.life_span} />
+            <Error>{error.life_span}</Error>
+
           </ContainInput>
           <ContainInput>
             <label>Images  </label>            

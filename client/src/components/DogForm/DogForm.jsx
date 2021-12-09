@@ -55,10 +55,18 @@ const DogForm = () => {
       })
       boolean= false;
     }else {
-      setError({
-        ...error,
-        temperament:''
-      })
+      if(state.temperament.length> 10){
+        setError({
+          ...error,
+          temperament:'temperaments are excesive'
+        })
+        boolean= false;
+      }else{
+        setError({
+          ...error,
+          temperament:''
+        })
+      }
     }
     return boolean;
   }
@@ -172,23 +180,23 @@ const DogForm = () => {
             <label>Images  </label>            
             <input name="images" onChange={handleState} value={state.images} />
           </ContainInput>
-          <label>Temperament/s </label>
-          <select name='selectTemp' onClick={selectTemp}>
-            <option value='Selecciona una opción'
-              label={'select'}/>
-                
-                { temp && temp.map( (temp)=>{
+          <ContainInput>
+            <label>Temperament/s <Agregado>Max 10</Agregado> </label>
+            <select name='selectTemp' onClick={selectTemp}>
+              <option value='Selecciona una opción'
+                label={'select'}/>
                   
-                  return <option name={temp.name} 
-                  key={temp.id}
-                  value={temp.id} 
-                  label={temp.name}/>
+                  { temp && temp.map( (temp)=>{
                     
-                })}
-          </select>
-          
-          <Error>{error.temperament}</Error>
-            
+                    return <option name={temp.name} 
+                    key={temp.id}
+                    value={temp.id} 
+                    label={temp.name}/>
+                      
+                  })}
+            </select>            
+            <Error>{error.temperament}</Error>
+          </ContainInput>
           <ContainerTemp> 
             {tempShow.temp?.map(e =>(
               <TempShow key ={e}>

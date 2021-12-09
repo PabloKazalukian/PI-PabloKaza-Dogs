@@ -5,7 +5,6 @@ let initalState={
     dog:[],
     temp:[],
     error:false
-
 }
 
 export default function rootReducer(state=initalState,action){
@@ -47,9 +46,7 @@ export default function rootReducer(state=initalState,action){
 
             return {...state, 
                     dog: state.dogs.filter( e =>{
-                        return e.temperament?.
-                        split(', ').
-                        find(elem => elem.toLowerCase() === action.payload)})
+                        return e.temperament?.split(', ').find(elem => elem.toLowerCase() === action.payload)})
                     }
 
         case SORT_WEIGHT:
@@ -93,10 +90,10 @@ export default function rootReducer(state=initalState,action){
                     position1= 0;
                     position2= 0;
                 }
-                if (parseInt(a[positionA],10) < parseInt(b[positionB],10) ) {
+                if (parseInt(a[position1],10) < parseInt(b[position2],10) ) {
                     return action.payload === 'mayor'? 1 : -1;
                 }
-                if (parseInt(a[positionA],10) > parseInt(b[positionB],10) ) {
+                if (parseInt(a[position1],10) > parseInt(b[position2],10) ) {
                     return action.payload === 'mayor'? -1 : 1;
                 }
                 return a[1]?b[1]?  (a[1]<b[1])?-1:1 :1 :-1;

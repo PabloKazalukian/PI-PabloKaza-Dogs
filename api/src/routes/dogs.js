@@ -9,20 +9,22 @@ const URL1 =`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`;
 
 router.get('/',async (req,res,next)=>{
     let name = req.query.name;
-    let dogsPromiseApi,dogsPromiseDb;
+    let dogsPromiseApi,dogsPromiseDb,ler;
     try{
         if(name){
             const URL2 =`https://api.thedogapi.com/v1/breeds/search?q=${name}`;
-            dogsPromiseApi = await axios.get(URL2);
-            dogsPromiseDb = await Dog.findAll({include: Temperament});
-            dogsPromiseDb = dogsPromiseDb.filter(dog => dog.dataValues.name.toLowerCase().includes(name.toLowerCase()))
+            dogsPromiseApi =  axios.get(URL2);
+            dogsPromiseDb =  Dog.findAll({include: Temperament})
+            .then(r => r.filter(dog => dog.dataValues.name.toLowerCase().includes(name.toLowerCase())))
+            // console.log(dogsPromiseDb);
+            // dogsPromiseDb =  dogsPromiseDb?.filter(dog => dog.dataValues.name.toLowerCase().includes(name.toLowerCase()))
         }else{
-            dogsPromiseApi = await axios.get(URL1);
-            dogsPromiseDb = await Dog.findAll({
+            dogsPromiseApi =  axios.get(URL1);
+            dogsPromiseDb =  Dog.findAll({
                 include: Temperament
-            });//posible error, devuelve un Temperament arreglo
+            });
         }
-        
+        // console.log(dogsPromiseDb);
         Promise.all([dogsPromiseApi,dogsPromiseDb])
         .then(respuesta=>{
             const [dogsApi,dogsDb] = respuesta; //Destructuro la respuesta de Promises
@@ -38,7 +40,8 @@ router.get('/',async (req,res,next)=>{
                     images: dogs.reference_image_id
                 }
             })
-            let filterDbDogs = dogsPromiseDb.map((dogs)=>{
+            // console.log(dogsDb);
+            let filterDbDogs = dogsDb.map((dogs)=>{
                 return {
                     id : dogs.id,
                     name: dogs.name,

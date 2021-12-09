@@ -48,6 +48,10 @@ export const InputBar = styled.input`
     letter-spacing: 1px;
     font-weight: 500;
     border: 0px;
+    &:target{
+        background: red;
+        border: 2px solid red;
+    }
 `
 export const ButtonBar = styled.input`
     border: 0px;

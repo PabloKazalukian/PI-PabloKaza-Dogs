@@ -17,6 +17,7 @@ export const ContainerUl = styled.ul`
     background: #d8eefe;
     list-style:none;
     gap: 1rem;
+    padding: 0px;
 
 `;
 export const ContainerLi = styled.li`

@@ -30,6 +30,7 @@ export const OrderDog= styled.div`
     & select {
         background:#d8eefe;
         color: #dd4565;
+        width: 155px;
         cursor: pointer;
         padding: 5px 10px;
         border-radius: 12px;
@@ -53,7 +54,7 @@ export const OrderDog= styled.div`
 
 
 export const TitleError = styled.h2`
---border-width: 3px;
+    --border-width: 3px;
     font-size: 1.9rem;
     border: 2px solid #333;
     padding: 15px;

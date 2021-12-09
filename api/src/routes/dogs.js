@@ -67,21 +67,25 @@ router.get('/',async (req,res,next)=>{
 
 router.get('/:idRaza',async (req,res,next)=>{
     const {idRaza} =  req.params;
-    
-    if(typeof idRaza === 'string' && idRaza.length>8 ){
-        //Base de Datos
-        const dogPK = await Dog.findByPk(idRaza,{include: Temperament});
-        dogPK.temperaments = dogPK?.temperaments.map((temp)=>{ return temp.dataValues.name});
-        return res.send(dogPK);
-    } else{
-        //Api
-        // const dogsPromiseApi = await axios.get(`https://api.thedogapi.com/v1/breeds/${idRaza}?api_key=${YOUR_API_KEY}`);
-        // res.send(dogsPromiseApi.data);
-        const dogsPromiseApi = await axios.get(URL1);
-        const dogsApi = dogsPromiseApi.data.find((dog) =>{
-            if(dog.id.toString() === idRaza) return dog
-        })
-        res.send(dogsApi);
+    try{
+        if(typeof idRaza === 'string' && idRaza.length>8 ){
+            //Base de Datos
+            const dogPK = await Dog.findByPk(idRaza,{include: Temperament});
+            dogPK.temperaments = dogPK?.temperaments?.map((temp)=>{ return temp.dataValues.name});
+            return res.send(dogPK);
+        } else{
+            //Api
+            // const dogsPromiseApi = await axios.get(`https://api.thedogapi.com/v1/breeds/${idRaza}?api_key=${YOUR_API_KEY}`);
+            // res.send(dogsPromiseApi.data);
+            const dogsPromiseApi = await axios.get(URL1);
+            const dogsApi = dogsPromiseApi.data.find((dog) =>{
+                if(dog.id.toString() === idRaza) return dog
+            })
+            res.send(dogsApi);
+        }
+    }
+    catch(err){
+        next(err);
     }
 })
 
